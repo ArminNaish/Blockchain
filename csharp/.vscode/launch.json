@@ -10,9 +10,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/Blockchain/bin/Debug/netcoreapp2.1/Blockchain.dll",
+            "program": "${workspaceFolder}/BlockChain/bin/Debug/netcoreapp2.1/Blockchain.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/Blockchain",
+            "cwd": "${workspaceFolder}/BlockChain",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart",
             "launchBrowser": {
