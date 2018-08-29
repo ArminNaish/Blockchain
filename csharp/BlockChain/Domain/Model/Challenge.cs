@@ -2,7 +2,7 @@ namespace BlockChain.Domain.Model
 {
     public class Challenge
     {
-        public ProofOfWork Solve(ProofOfWork lastProof)
+        public ProofOfWork Solve(long lastProof)
         {
             var proof = 0;
             ProofOfWork pow;

@@ -13,6 +13,10 @@ using Microsoft.Extensions.Options;
 using BlockChain.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using BlockChain.Infrastructure.Entities;
+using BlockChain.Infrastructure.Mapper;
+using BlockChain.Domain;
+using BlockChain.Infrastructure.Repositories;
+using BlockChain.Controllers;
 
 namespace BlockChain
 {
@@ -29,6 +33,10 @@ namespace BlockChain
         {
             services.AddDbContext<ApiContext>((builder) => builder.UseInMemoryDatabase("blockchain-store"));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddScoped<IBlockchainMapper, BlockchainMapper>();
+            services.AddScoped<IBlockchainRepository, BlockchainRepository>();
+            services.AddSingleton<Node>(new Node());
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

@@ -19,6 +19,11 @@ namespace BlockChain.Domain.Model
             this.hash = hash;
         }
 
+        public static Sha256Hash Reconstitute(string hash)
+        {
+            return new Sha256Hash(hash);
+        }
+
         public bool StartsWith(string value)
         {
             if (string.IsNullOrEmpty(value))
@@ -44,6 +49,10 @@ namespace BlockChain.Domain.Model
         public static Sha256Hash Of(object obj)
         {
             return Of(obj.AsJson());
+        }
+
+        public override string ToString(){
+            return hash;
         }
     }
 }

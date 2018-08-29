@@ -15,9 +15,16 @@ namespace BlockChain.Domain.Model
         private readonly ICollection<Transaction> transactions;
 
         public Block(long index, ProofOfWork proof, Sha256Hash previousHash, IEnumerable<Transaction> transactions)
+            : this(index, DateTimeOffset.UtcNow.ToUnixTimeSeconds(), proof, previousHash, transactions)
+        {
+        }
+
+        public Block(long index, long timestamp, ProofOfWork proof, Sha256Hash previousHash, IEnumerable<Transaction> transactions)
         {
             if (index <= 0)
                 throw new ArgumentException("Index must be greater than zero");
+            if (timestamp <= 0)
+                throw new ArgumentException("Timestamp must be greater than zero");
             if (index == 1)
                 throw new ArgumentException("Index 1 is already used by genesis block");
             if (proof == null)
@@ -28,41 +35,26 @@ namespace BlockChain.Domain.Model
                 throw new ArgumentException("Transactions must not be empty");
 
             this.index = index;
-            this.timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+            this.timestamp = timestamp;
             this.proof = proof;
             this.previousHash = previousHash;
             this.transactions = transactions.ToList();
         }
 
-        
-        private Block()
+    public long Index => index;
+
+    public long Timestamp => timestamp;
+
+    public long Proof => proof.Value;
+
+    public string PreviousHash => previousHash.ToString();
+
+    public IReadOnlyCollection<Transaction> Transactions
+    {
+        get
         {
-            // This constructor is used by genesis block
-            // which does not neither proof nor previous hash
-            this.index = 1;
-            this.timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-            this.transactions = new List<Transaction>();
-        }
-
-        public static Block Genesis()
-        {
-            return new Block();
-        }
-
-        public virtual long Index => index;
-
-        public virtual long Timestamp => timestamp;
-
-        public virtual ProofOfWork Proof => proof;
-
-        public virtual Sha256Hash PreviousHash => previousHash;
-
-        public virtual IReadOnlyCollection<Transaction> Transactions
-        {
-            get
-            {
-                return new List<Transaction>(transactions).AsReadOnly();
-            }
+            return new List<Transaction>(transactions).AsReadOnly();
         }
     }
+}
 }

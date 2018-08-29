@@ -4,11 +4,11 @@ namespace BlockChain.Domain.Model
 {
     public class Transaction : ValueObject
     {
-        private readonly Guid sender;
+        private readonly Guid? sender;
         private readonly Guid recepient;
         private readonly long amount;
 
-        public Transaction(Guid sender, Guid receiver, long amount)
+        public Transaction(Guid? sender, Guid receiver, long amount)
         {
             if (object.Equals(sender, default(Guid)))
                 throw new ArgumentException("Sender must not be empty");

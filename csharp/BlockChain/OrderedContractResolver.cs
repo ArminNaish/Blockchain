@@ -4,7 +4,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace BlockChain.Domain
+namespace BlockChain
 {
     public class OrderedContractResolver : DefaultContractResolver
     {
