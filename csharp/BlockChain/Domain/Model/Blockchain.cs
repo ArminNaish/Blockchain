@@ -10,56 +10,59 @@ namespace BlockChain.Domain.Model
     {
         private readonly ICollection<Block> chain;
         private readonly ICollection<Transaction> currentTransactions;
+        private readonly ICollection<Node> nodes;
+        private readonly Node self; // todo: this must be configurable
 
-        public Blockchain() : base(Guid.NewGuid())
+        public Blockchain(Guid? id = null) : base(id ?? Guid.NewGuid())
         {
-            chain = new List<Block>{};
+            chain = new List<Block> { };
             currentTransactions = new List<Transaction>();
-            NewBlock(new ProofOfWork(1),  Sha256Hash.Of("Genesis"));
+            nodes = new List<Node>();
+            self = new Node(new Uri(@"http://127.0.0.5:5000"));
+            NewBlock(new ProofOfWork(1), Sha256Hash.Of("Genesis"));
         }
 
-        private Blockchain(Guid id, ICollection<Block> chain, ICollection<Transaction> currentTransactions):base(id)
-        {
-            this.chain = chain.ToList();
-            this.currentTransactions = currentTransactions.ToList();
-        }
+        public IReadOnlyCollection<Block> Chain => chain.AsReadOnly();
 
-        public static Blockchain Reconstitute(Guid id, ICollection<Block> chain, ICollection<Transaction> currentTransactions)
-        {
-            return new Blockchain(id, chain, currentTransactions);
-        }
+        public IReadOnlyCollection<Transaction> CurrentTransactions => currentTransactions.AsReadOnly();
+        public ICollection<Node> Nodes => nodes;
 
-        public ICollection<Block> Chain => chain;
+        private Block LastBlock => chain.Last();
 
-        private Block LastBlock
+        public long NewTransaction(Node sender, Node recipient, long amount)
         {
-            get
-            {
-                return chain.Last();
-            }
-        }
-
-        public long NewTransaction(Guid sender, Guid recipient, long amount)
-        {
-            currentTransactions.Add(new Transaction(sender, recipient, amount));
+            var transaction = new Transaction(sender, recipient, amount);
+            currentTransactions.Add(transaction);
             return LastBlock.Index + 1;
             // todo: raise domain event
         }
 
-        public Block Mine(Guid nodeId)
+        public Block Mine()
         {
             // Solve challenge and receive proof of work
             var proof = new Challenge().Solve(LastBlock.Proof);
             // We must receive a reward for finding the proof
             // The sender is 'null' to signify that this node has mined a new coin.
-            currentTransactions.Add(new Transaction(null, nodeId, 1));
+            currentTransactions.Add(new Transaction(null, self, 1));
             // Forge the new Block by adding it to the chain
             return NewBlock(proof);
-            // todo: raise domain event
+        }
+
+        public void Register(Uri address)
+        {
+            var node = new Node(address);
+            if (!Nodes.Contains(node))
+            {
+                Nodes.Add(node);
+                // todo: raise domain event
+            }
         }
 
         private Block NewBlock(ProofOfWork proof, Sha256Hash previousHash = null)
         {
+            if (proof == null)
+                throw new ArgumentNullException("Proof must not be null");
+
             var block = new Block(
                 index: chain.Count + 1,
                 proof: proof,
@@ -68,6 +71,8 @@ namespace BlockChain.Domain.Model
 
             currentTransactions.Clear();
             chain.Add(block);
+
+            // todo: raise domain event
 
             return block;
         }

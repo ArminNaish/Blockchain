@@ -18,5 +18,10 @@ namespace BlockChain.Domain
 
             return JsonConvert.SerializeObject(source, Formatting.Indented, settings);
         }
+
+        public static IReadOnlyCollection<T> AsReadOnly<T>(this ICollection<T> collection)
+        {
+            return new List<T>().AsReadOnly();
+        }
     }
 }

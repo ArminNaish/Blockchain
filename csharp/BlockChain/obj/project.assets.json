@@ -2,6 +2,19 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.1": {
+      "JsonFlatFileDataStore/2.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.5.0",
+          "Newtonsoft.Json": "11.0.2"
+        },
+        "compile": {
+          "lib/netstandard2.0/JsonFlatFileDataStore.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/JsonFlatFileDataStore.dll": {}
+        }
+      },
       "Microsoft.AspNet.WebApi.Client/5.2.6": {
         "type": "package",
         "dependencies": {
@@ -4337,6 +4350,17 @@
     }
   },
   "libraries": {
+    "JsonFlatFileDataStore/2.0.0": {
+      "sha512": "7FnEcAoXFmE8jf9Cb+qV2PqOE0YhE8XaXLPYfPexaivk4+rW0ibfgxjrP21QUllWV4q5rIBEOH1W3Nkcl36g4Q==",
+      "type": "package",
+      "path": "jsonflatfiledatastore/2.0.0",
+      "files": [
+        "jsonflatfiledatastore.2.0.0.nupkg.sha512",
+        "jsonflatfiledatastore.nuspec",
+        "lib/netstandard2.0/JsonFlatFileDataStore.dll",
+        "lib/netstandard2.0/JsonFlatFileDataStore.xml"
+      ]
+    },
     "Microsoft.AspNet.WebApi.Client/5.2.6": {
       "sha512": "rMDlyePoxggkmN/qgha1+BR2Uy+dOr38xKCQOPfVNKGY07R2nYJGMTKJFE1XFgwD70RYUNazf2fqutjJF18XgQ==",
       "type": "package",
@@ -11495,6 +11519,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
+      "JsonFlatFileDataStore >= 2.0.0",
       "Microsoft.AspNetCore.App >= 2.1.1",
       "Microsoft.EntityFrameworkCore.InMemory >= 2.1.2",
       "Microsoft.NETCore.App >= 2.1.0",
@@ -11540,6 +11565,10 @@
     "frameworks": {
       "netcoreapp2.1": {
         "dependencies": {
+          "JsonFlatFileDataStore": {
+            "target": "Package",
+            "version": "[2.0.0, )"
+          },
           "Microsoft.AspNetCore.App": {
             "suppressParent": "All",
             "target": "Package",

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BlockChain.Domain.Model;
 using BlockChain.Domain;
-using BlockChain.Controllers.DTO;
+using JsonFlatFileDataStore;
 
 namespace BlockChain.Controllers
 {
@@ -14,20 +14,24 @@ namespace BlockChain.Controllers
     public class BlockchainsController : ControllerBase
     {
         private readonly IBlockchainRepository repository;
-        private readonly Node node;
+        private readonly IDataStore store;
 
-        public BlockchainsController(IBlockchainRepository repository, Node node)
+        public BlockchainsController(IBlockchainRepository repository, IDataStore store)
         {
             this.repository = repository;
-            this.node = node;
+            this.store = store;
         }
 
         // GET api/blockchains/a6407387-7a9c-4343-99f1-98be977252ce
         [HttpGet("{id}")]
         public dynamic GetById(Guid id)
         {
-            var blockchain = repository.GetBlockChainById(id);
-            return new {
+            var blockchain = store.GetItem<Blockchain>(id.ToString());
+            if (blockchain == null)
+                return NotFound($"Blockchain not found: {id}");
+
+            return new
+            {
                 Chain = blockchain.Chain,
                 Length = blockchain.Chain.Count
             };
@@ -35,28 +39,57 @@ namespace BlockChain.Controllers
 
         // POST api/blockchains/a6407387-7a9c-4343-99f1-98be977252ce/transactions
         [HttpPost("{id}/transactions")]
-        public dynamic CreateTransaction(Guid id, CreateTransaction dto)
+        public async Task<dynamic> CreateTransaction(Guid id, dynamic data)
         {
-            var blockchain = repository.GetBlockChainById(id);
-            var index = blockchain.NewTransaction(dto.Sender, dto.Recepient, dto.Amount);
-            // todo: implement save changes!!!
-            // This method should return 201 - created with the url of the created resource
-            return Ok(new {Message = $"Transaction will be added to Block {index}"});
+            var blockchain = store.GetItem<Blockchain>(id.ToString());
+            if (blockchain == null)
+                return NotFound($"Blockchain not found: {id}");
+
+            var index = blockchain.NewTransaction(data.Sender, data.Recepient, data.Amount);
+            await store.ReplaceItemAsync(blockchain.Id.ToString(), blockchain, upsert: true);
+            return Ok(new
+            {
+                Message = $"Transaction will be added to Block {index}"
+            });
         }
 
         // POST api/blockchains/a6407387-7a9c-4343-99f1-98be977252ce/mine
         [HttpPost("{id}/mine")]
-        public dynamic Mine(Guid id)
+        public async Task<dynamic> Mine(Guid id)
         {
-            var blockchain = repository.GetBlockChainById(id);
-            var block = blockchain.Mine(node.Id);
-            // todo: implement save changes!!!
-            return Ok(new {
+            var blockchain = store.GetItem<Blockchain>(id.ToString());
+            if (blockchain == null)
+                return NotFound($"Blockchain not found: {id}");
+
+            var block = blockchain.Mine();
+            await store.ReplaceItemAsync(blockchain.Id.ToString(), blockchain, upsert: true);
+
+            return Ok(new
+            {
                 Message = "New block forged",
                 Index = block.Index,
                 Transactions = block.Transactions,
                 Proof = block.Proof,
                 PreviousHash = block.PreviousHash
+            });
+        }
+
+        // POST api/blockchains/a6407387-7a9c-4343-99f1-98be977252ce/register
+        [HttpPost("{id}/register")]
+        public dynamic Register(Guid id, string address)
+        {
+            if (Uri.TryCreate(address, UriKind.Absolute, out var node))
+                return BadRequest("Address must not be empty");
+
+            var blockchain = store.GetItem<Blockchain>(id.ToString());
+            if (blockchain == null)
+                return NotFound($"Blockchain not found: {id}");
+
+            blockchain.Register(node);
+
+            return Ok(new {
+                Message = "New nodes have been added",
+                TotalNodes = blockchain.Nodes
             });
         }
     }

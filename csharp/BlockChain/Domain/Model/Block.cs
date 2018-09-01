@@ -41,20 +41,20 @@ namespace BlockChain.Domain.Model
             this.transactions = transactions.ToList();
         }
 
-    public long Index => index;
+        public long Index => index;
 
-    public long Timestamp => timestamp;
+        public long Timestamp => timestamp;
 
-    public long Proof => proof.Value;
+        public long Proof => proof.Value;
 
-    public string PreviousHash => previousHash.ToString();
+        public string PreviousHash => previousHash.ToString();
 
-    public IReadOnlyCollection<Transaction> Transactions
-    {
-        get
+        public IReadOnlyCollection<Transaction> Transactions
         {
-            return new List<Transaction>(transactions).AsReadOnly();
+            get
+            {
+                return new List<Transaction>(transactions).AsReadOnly();
+            }
         }
     }
-}
 }
