@@ -13,7 +13,6 @@ using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using BlockChain.Domain;
 using BlockChain.Controllers;
-using JsonFlatFileDataStore;
 using BlockChain.Domain.Model;
 
 namespace BlockChain
@@ -30,13 +29,21 @@ namespace BlockChain
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddSingleton<IDataStore>( new DataStore("blockchain-store.json"));
+            services.AddSingleton(MakeBlockchain());
+            services.AddScoped<IBlockchainApiClient, BlockchainApiClient>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseMiddleware<ErrorHandlingMiddleware>();
             app.UseMvc();
+        }
+        
+        private Blockchain MakeBlockchain()
+        {
+            var url = Configuration.GetValue<string>("url", @"http://127.0.0.1:5000/");
+            var self = new Node(url);
+            return new Blockchain(self);
         }
     }
 }

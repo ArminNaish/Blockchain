@@ -6,6 +6,11 @@ namespace BlockChain.Domain.Model
     {
         private readonly Uri address;
 
+        public Node(string address)
+         : this(new Uri(address))
+        {
+        }
+
         public Node(Uri address) 
         {
             this.address = address;

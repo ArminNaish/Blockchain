@@ -4,30 +4,23 @@ namespace BlockChain.Domain.Model
 {
     public class ProofOfWork : ValueObject
     {
-        private readonly long value;
-        private readonly long? lastValue;
+        private readonly long proof;
 
-        public ProofOfWork(long value, long? lastValue = null)
+        public ProofOfWork(long proof)
         {
-            if (value < 0)
-                throw new ArgumentException("Value must not be negative");
-              if (lastValue.HasValue && lastValue.Value < 0)
-                throw new ArgumentException("Last value must not be negative");
-            this.value = value;
-            this.lastValue = lastValue;
+            if (proof < 0)
+                throw new ArgumentException("Proof must not be negative");
+            this.proof = proof;
         }
 
-        public virtual long Value => value;
-
-        public virtual bool Verify()
+        public virtual bool Verify(ProofOfWork lastProof)
         {
-            if (lastValue == null)
-                throw new InvalidOperationException("Genesis block cannot be verified");
+            if (lastProof == null)
+                throw new InvalidOperationException("Last proof must not be null");
 
             return Sha256Hash
-                .Of($"{lastValue}{value}")
+                .Of($"{lastProof.proof}{proof}")
                 .StartsWith("0000");
         }
-
     }
 }

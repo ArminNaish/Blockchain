@@ -9,7 +9,7 @@ namespace BlockChain.Domain.Model
     {
         private readonly string hash;
 
-        private Sha256Hash(string hash)
+        public Sha256Hash(string hash)
         {
             if (string.IsNullOrEmpty(hash))
                 throw new ArgumentException("Previous hash must not be empty");
@@ -17,11 +17,6 @@ namespace BlockChain.Domain.Model
                 throw new ArgumentException("Previous hash must be a SHA256 hash");
 
             this.hash = hash;
-        }
-
-        public static Sha256Hash Reconstitute(string hash)
-        {
-            return new Sha256Hash(hash);
         }
 
         public bool StartsWith(string value)

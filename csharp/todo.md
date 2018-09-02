@@ -1,2 +1,0 @@
- - replace entity framework in memory with json store
- - implement register node methods

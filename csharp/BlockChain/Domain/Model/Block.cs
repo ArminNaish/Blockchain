@@ -14,16 +14,11 @@ namespace BlockChain.Domain.Model
         private readonly Sha256Hash previousHash;
         private readonly ICollection<Transaction> transactions;
 
-        public Block(long index, ProofOfWork proof, Sha256Hash previousHash, IEnumerable<Transaction> transactions)
-            : this(index, DateTimeOffset.UtcNow.ToUnixTimeSeconds(), proof, previousHash, transactions)
-        {
-        }
-
-        public Block(long index, long timestamp, ProofOfWork proof, Sha256Hash previousHash, IEnumerable<Transaction> transactions)
+        public Block(long index, ProofOfWork proof, Sha256Hash previousHash, IEnumerable<Transaction> transactions, long? timestamp = null)
         {
             if (index <= 0)
                 throw new ArgumentException("Index must be greater than zero");
-            if (timestamp <= 0)
+            if (timestamp.HasValue && timestamp.Value <= 0)
                 throw new ArgumentException("Timestamp must be greater than zero");
             if (index == 1)
                 throw new ArgumentException("Index 1 is already used by genesis block");
@@ -35,19 +30,24 @@ namespace BlockChain.Domain.Model
                 throw new ArgumentException("Transactions must not be empty");
 
             this.index = index;
-            this.timestamp = timestamp;
+            this.timestamp = timestamp ?? DateTimeOffset.UtcNow.ToUnixTimeSeconds();
             this.proof = proof;
             this.previousHash = previousHash;
             this.transactions = transactions.ToList();
+        }
+
+        public static Block Reconstitute(long index, long timestamp, long proof, string previousHash, IEnumerable<Transaction> transactions)
+        {
+            return new Block(index, new ProofOfWork(proof), new Sha256Hash(previousHash), transactions, timestamp);
         }
 
         public long Index => index;
 
         public long Timestamp => timestamp;
 
-        public long Proof => proof.Value;
+        public ProofOfWork Proof => proof;
 
-        public string PreviousHash => previousHash.ToString();
+        public Sha256Hash PreviousHash => previousHash;
 
         public IReadOnlyCollection<Transaction> Transactions
         {
@@ -55,6 +55,16 @@ namespace BlockChain.Domain.Model
             {
                 return new List<Transaction>(transactions).AsReadOnly();
             }
+        }
+
+        public Sha256Hash Hash()
+        {
+            return Sha256Hash.Of(this);
+        }
+
+        public bool VerifyProofOfWork(Block other)
+        {
+            return Proof.Verify(other.Proof);
         }
     }
 }

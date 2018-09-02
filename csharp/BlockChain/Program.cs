@@ -12,15 +12,23 @@ namespace BlockChain
 {
     public class Program
     {
-        // todo: https://stackoverflow.com/questions/41290566/net-core-pass-commandline-args-to-startup-cs-from-program-cs
-        // todo2: Implementing the Consensus Algorithm
         public static void Main(string[] args)
         {
             CreateWebHostBuilder(args).Build().Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
+        {
+            var config = new ConfigurationBuilder()
+                .AddCommandLine(args)
+                .Build();
+
+            var url = config.GetValue<string>("url", @"http://127.0.0.1:5000");
+
+            return WebHost.CreateDefaultBuilder(args)
+                .UseConfiguration(config)
+                .UseUrls(url)
                 .UseStartup<Startup>();
+        }
     }
 }
