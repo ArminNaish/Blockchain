@@ -4,29 +4,32 @@ using System.Collections.Generic;
 using System.Text;
 using System.Security.Cryptography;
 using BlockChain.Domain.Events;
+using System.Runtime.CompilerServices;
+
+// Make internal methods visible to test project
+[assembly:InternalsVisibleTo("Blockchain.Tests")]
 
 namespace BlockChain.Domain.Model
 {
     public class Blockchain : Entity<Guid>, IAggregateRoot
     {
-        private IList<Block> chain;
+        private IList<Block> blocks;
         private readonly ICollection<Transaction> currentTransactions;
         private readonly ICollection<Node> nodes;
         private readonly Node self;
 
         public Blockchain(Node self) : base(Guid.NewGuid())
         {
-            this.chain = new List<Block> { };
+            this.blocks = new List<Block> { Block.Genesis()};
             this.currentTransactions = new List<Transaction>();
             this.nodes = new List<Node>();
             this.self = self;
-            NewBlock(new ProofOfWork(1), Sha256Hash.Of("Genesis"));
         }
 
-        public IReadOnlyCollection<Block> Chain => chain.AsReadOnly();
+        public IReadOnlyCollection<Block> Blocks => blocks.AsReadOnly();
         public IReadOnlyCollection<Transaction> CurrentTransactions => currentTransactions.AsReadOnly();
         public ICollection<Node> Nodes => nodes;
-        private Block LastBlock => chain.Last();
+        internal Block LastBlock => blocks.Last();
 
         /// <summary>
         /// Creates a new transaction to go into the next mined block
@@ -58,6 +61,8 @@ namespace BlockChain.Domain.Model
         /// </summary>
         public void Register(Uri address)
         {
+            if (address == null)
+                throw new ArgumentNullException("Address must not be null");
             var node = new Node(address);
             if (!Nodes.Contains(node))
             {
@@ -75,7 +80,7 @@ namespace BlockChain.Domain.Model
             IList<Block> newChain = null;
             foreach (var otherChain in otherChains)
             {
-                if (otherChain.Count > chain.Count && Validate(otherChain))
+                if (otherChain.Count > blocks.Count && Validate(otherChain))
                 {
                     newChain = otherChain;
                 }
@@ -83,7 +88,7 @@ namespace BlockChain.Domain.Model
 
             if (newChain != null)
             {
-                chain = newChain;
+                blocks = newChain;
                 DomainEvents.Raise(new BlockchainReplacedEvent());
                 return true;
             }
@@ -94,19 +99,19 @@ namespace BlockChain.Domain.Model
         /// <summary>
         /// Create a new block in the blockchain
         /// </summary>
-        private Block NewBlock(ProofOfWork proof, Sha256Hash previousHash = null)
+        internal Block NewBlock(ProofOfWork proof)
         {
             if (proof == null)
                 throw new ArgumentNullException("Proof must not be null");
 
             var block = new Block(
-                index: chain.Count + 1,
+                index: blocks.Count + 1,
                 proof: proof,
-                previousHash: previousHash ?? LastBlock.Hash(),
+                previousHash: LastBlock.Hash(),
                 transactions: currentTransactions);
 
             currentTransactions.Clear();
-            chain.Add(block);
+            blocks.Add(block);
 
             DomainEvents.Raise(new NewBlockForgedEvent());
 

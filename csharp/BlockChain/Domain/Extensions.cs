@@ -14,7 +14,8 @@ namespace BlockChain.Domain
             var settings = new JsonSerializerSettings()
             {
                 // Ensure order of properties in serialized objects
-                ContractResolver = new OrderedContractResolver()
+                ContractResolver = new OrderedContractResolver(),
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore 
             };
 
             return JsonConvert.SerializeObject(source, Formatting.Indented, settings);
@@ -27,20 +28,7 @@ namespace BlockChain.Domain
 
         public static IReadOnlyCollection<T> AsReadOnly<T>(this ICollection<T> collection)
         {
-            return new List<T>().AsReadOnly();
-        }
-
-        public static bool HasProperty(dynamic data, string name)
-        {
-            if (data is ExpandoObject)
-                return ((IDictionary<string, object>)data).ContainsKey(name);
-
-            return data.GetType().GetProperty(name) != null;
-        }
-
-        public static bool HasProperties(dynamic data, params string[] names)
-        {
-            return names.All(name => data.HasProperty(name));
+            return new List<T>(collection).AsReadOnly();
         }
     }
 }

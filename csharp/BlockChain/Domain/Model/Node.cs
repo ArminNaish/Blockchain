@@ -11,6 +11,11 @@ namespace BlockChain.Domain.Model
         {
         }
 
+        public static Node Localhost()
+        {
+            return new Node(@"http://127.0.0.1:5000/");
+        }
+
         public Node(Uri address) 
         {
             this.address = address;

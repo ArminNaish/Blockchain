@@ -18,22 +18,37 @@ namespace BlockChain.Domain.Model
         {
             if (index <= 0)
                 throw new ArgumentException("Index must be greater than zero");
-            if (timestamp.HasValue && timestamp.Value <= 0)
-                throw new ArgumentException("Timestamp must be greater than zero");
             if (index == 1)
-                throw new ArgumentException("Index 1 is already used by genesis block");
+                throw new ArgumentException("Index 1 reserved for genesis block");
             if (proof == null)
                 throw new ArgumentNullException("Proof must not be null");
             if (previousHash == null)
                 throw new ArgumentNullException("PreviousHash must not be null");
-            if (!transactions.Any())
-                throw new ArgumentException("Transactions must not be empty");
+            if (timestamp.HasValue && timestamp.Value <= 0)
+                throw new ArgumentException("Timestamp must be greater than zero");
+
+            // Blocks without transactions are adding new layers of difficulty to ensure the
+            // practical immutability of past blocks, i.e. the list of transactions may be empty
 
             this.index = index;
             this.timestamp = timestamp ?? DateTimeOffset.UtcNow.ToUnixTimeSeconds();
             this.proof = proof;
             this.previousHash = previousHash;
             this.transactions = transactions.ToList();
+        }
+
+        private Block()
+        {
+            this.index = 1;
+            this.timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+            this.proof =  new ProofOfWork(1);
+            this.previousHash =  Sha256Hash.Of("Genesis");
+            this.transactions = new List<Transaction>();
+        }
+
+        public static Block Genesis()
+        {
+            return new Block();
         }
 
         public static Block Reconstitute(long index, long timestamp, long proof, string previousHash, IEnumerable<Transaction> transactions)
@@ -59,7 +74,13 @@ namespace BlockChain.Domain.Model
 
         public Sha256Hash Hash()
         {
-            return Sha256Hash.Of(this);
+            var properties = new {
+                Index,
+                Timestamp, 
+                Proof, 
+                PreviousHash, 
+                Transactions};
+            return Sha256Hash.Of(properties.AsJson());
         }
 
         public bool VerifyProofOfWork(Block other)

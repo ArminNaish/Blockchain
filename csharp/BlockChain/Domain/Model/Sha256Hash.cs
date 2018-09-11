@@ -14,7 +14,7 @@ namespace BlockChain.Domain.Model
             if (string.IsNullOrEmpty(hash))
                 throw new ArgumentException("Previous hash must not be empty");
             if (!Regex.IsMatch(hash, "[A-Fa-f0-9]{64}"))
-                throw new ArgumentException("Previous hash must be a SHA256 hash");
+                throw new ArgumentException("Previous hash must be a valid SHA256 hash");
 
             this.hash = hash;
         }
@@ -41,12 +41,8 @@ namespace BlockChain.Domain.Model
             return new Sha256Hash(hash);
         }
 
-        public static Sha256Hash Of(object obj)
+        public override string ToString()
         {
-            return Of(obj.AsJson());
-        }
-
-        public override string ToString(){
             return hash;
         }
     }

@@ -26,7 +26,6 @@ namespace BlockChain
             return chains;
         }
 
-        // todo: add comments
         private IList<Block> GetChain(Node node)
         {
             var client = new RestClient(node.Address);
