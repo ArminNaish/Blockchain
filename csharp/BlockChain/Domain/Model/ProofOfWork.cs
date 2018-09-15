@@ -13,13 +13,15 @@ namespace BlockChain.Domain.Model
             this.proof = proof;
         }
 
+        internal long Proof => proof;
+
         public virtual bool Verify(ProofOfWork lastProof)
         {
             if (lastProof == null)
                 throw new InvalidOperationException("Last proof must not be null");
 
             return Sha256Hash
-                .Of($"{lastProof.proof}{proof}")
+                .Of($"{lastProof.Proof}{Proof}")
                 .StartsWith("0000");
         }
     }

@@ -1,0 +1,2083 @@
+{
+  "/home/armin/code/Blockchain/csharp/BlockChain.Tests/bin/Debug/netcoreapp2.1/Blockchain.dll": {
+    "/home/armin/code/Blockchain/csharp/BlockChain/BlockchainApiClient.cs": {
+      "BlockChain.BlockchainApiClient": {
+        "System.Collections.Generic.IEnumerable`1<System.Collections.Generic.IList`1<BlockChain.Domain.Model.Block>> BlockChain.BlockchainApiClient::FindChainsInNetwork(System.Collections.Generic.IEnumerable`1<BlockChain.Domain.Model.Node>)": {
+          "Lines": {
+            "16": 0,
+            "17": 0,
+            "18": 0,
+            "19": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "25": 0,
+            "26": 0,
+            "27": 0
+          },
+          "Branches": [
+            {
+              "Line": 18,
+              "Offset": 55,
+              "EndOffset": 17,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 18,
+              "Offset": 55,
+              "EndOffset": 57,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Collections.Generic.IList`1<BlockChain.Domain.Model.Block> BlockChain.BlockchainApiClient::GetChain(BlockChain.Domain.Model.Node)": {
+          "Lines": {
+            "30": 0,
+            "31": 0,
+            "33": 0,
+            "34": 0,
+            "36": 0,
+            "37": 0,
+            "38": 0,
+            "40": 0,
+            "41": 0,
+            "42": 0,
+            "43": 0,
+            "45": 0,
+            "46": 0,
+            "47": 0,
+            "48": 0,
+            "49": 0,
+            "50": 0,
+            "51": 0,
+            "52": 0,
+            "53": 0,
+            "54": 0,
+            "56": 0,
+            "57": 0,
+            "59": 0,
+            "60": 0
+          },
+          "Branches": [
+            {
+              "Line": 37,
+              "Offset": 70,
+              "EndOffset": 72,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 37,
+              "Offset": 70,
+              "EndOffset": 99,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 45,
+              "Offset": 151,
+              "EndOffset": 153,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 45,
+              "Offset": 151,
+              "EndOffset": 176,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 56,
+              "Offset": 207,
+              "EndOffset": 209,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 56,
+              "Offset": 207,
+              "EndOffset": 220,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            }
+          ]
+        }
+      },
+      "BlockChain.BlockchainApiClient/<>c": {
+        "BlockChain.Domain.Model.Block BlockChain.BlockchainApiClient/<>c::<GetChain>b__1_0(System.Object)": {
+          "Lines": {},
+          "Branches": [
+            {
+              "Line": 48,
+              "Offset": 5,
+              "EndOffset": 9,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 48,
+              "Offset": 5,
+              "EndOffset": 46,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 48,
+              "Offset": 66,
+              "EndOffset": 70,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 48,
+              "Offset": 66,
+              "EndOffset": 117,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 48,
+              "Offset": 148,
+              "EndOffset": 152,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 48,
+              "Offset": 148,
+              "EndOffset": 189,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 48,
+              "Offset": 209,
+              "EndOffset": 213,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 0
+            },
+            {
+              "Line": 48,
+              "Offset": 209,
+              "EndOffset": 260,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 48,
+              "Offset": 291,
+              "EndOffset": 295,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 0
+            },
+            {
+              "Line": 48,
+              "Offset": 291,
+              "EndOffset": 332,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 0
+            },
+            {
+              "Line": 48,
+              "Offset": 352,
+              "EndOffset": 356,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 0
+            },
+            {
+              "Line": 48,
+              "Offset": 352,
+              "EndOffset": 403,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 0
+            },
+            {
+              "Line": 48,
+              "Offset": 434,
+              "EndOffset": 438,
+              "Path": 1,
+              "Ordinal": 13,
+              "Hits": 0
+            },
+            {
+              "Line": 48,
+              "Offset": 434,
+              "EndOffset": 475,
+              "Path": 0,
+              "Ordinal": 12,
+              "Hits": 0
+            },
+            {
+              "Line": 48,
+              "Offset": 495,
+              "EndOffset": 499,
+              "Path": 1,
+              "Ordinal": 15,
+              "Hits": 0
+            },
+            {
+              "Line": 48,
+              "Offset": 495,
+              "EndOffset": 546,
+              "Path": 0,
+              "Ordinal": 14,
+              "Hits": 0
+            },
+            {
+              "Line": 48,
+              "Offset": 577,
+              "EndOffset": 581,
+              "Path": 1,
+              "Ordinal": 17,
+              "Hits": 0
+            },
+            {
+              "Line": 48,
+              "Offset": 577,
+              "EndOffset": 618,
+              "Path": 0,
+              "Ordinal": 16,
+              "Hits": 0
+            },
+            {
+              "Line": 48,
+              "Offset": 638,
+              "EndOffset": 642,
+              "Path": 1,
+              "Ordinal": 19,
+              "Hits": 0
+            },
+            {
+              "Line": 48,
+              "Offset": 638,
+              "EndOffset": 689,
+              "Path": 0,
+              "Ordinal": 18,
+              "Hits": 0
+            },
+            {
+              "Line": 48,
+              "Offset": 721,
+              "EndOffset": 723,
+              "Path": 0,
+              "Ordinal": 20,
+              "Hits": 0
+            },
+            {
+              "Line": 48,
+              "Offset": 721,
+              "EndOffset": 746,
+              "Path": 1,
+              "Ordinal": 21,
+              "Hits": 0
+            }
+          ]
+        },
+        "BlockChain.Domain.Model.Transaction BlockChain.BlockchainApiClient/<>c::<GetChain>b__1_1(System.Object)": {
+          "Lines": {},
+          "Branches": [
+            {
+              "Line": 53,
+              "Offset": 5,
+              "EndOffset": 9,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 53,
+              "Offset": 5,
+              "EndOffset": 82,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 53,
+              "Offset": 112,
+              "EndOffset": 116,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 53,
+              "Offset": 112,
+              "EndOffset": 163,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 53,
+              "Offset": 189,
+              "EndOffset": 193,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 53,
+              "Offset": 189,
+              "EndOffset": 240,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 53,
+              "Offset": 266,
+              "EndOffset": 270,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 0
+            },
+            {
+              "Line": 53,
+              "Offset": 266,
+              "EndOffset": 317,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            }
+          ]
+        }
+      }
+    },
+    "/home/armin/code/Blockchain/csharp/BlockChain/ErrorHandlingMiddleware.cs": {
+      "BlockChain.ErrorHandlingMiddleware": {
+        "System.Void BlockChain.ErrorHandlingMiddleware::.ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILoggerFactory)": {
+          "Lines": {
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "18": 0,
+            "19": 0
+          },
+          "Branches": []
+        }
+      },
+      "BlockChain.ErrorHandlingMiddleware/<Invoke>d__3": {
+        "System.Void BlockChain.ErrorHandlingMiddleware/<Invoke>d__3::MoveNext()": {
+          "Lines": {
+            "22": 0,
+            "24": 0,
+            "25": 0,
+            "26": 0,
+            "27": 0,
+            "28": 0,
+            "29": 0,
+            "30": 0,
+            "31": 0,
+            "32": 0,
+            "33": 0,
+            "34": 0
+          },
+          "Branches": [
+            {
+              "Line": 22,
+              "Offset": 14,
+              "EndOffset": 25,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 22,
+              "Offset": 35,
+              "EndOffset": 41,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 25,
+              "Offset": 77,
+              "EndOffset": 79,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 22,
+              "Offset": 35,
+              "EndOffset": 118,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 25,
+              "Offset": 77,
+              "EndOffset": 146,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 27,
+              "Offset": 185,
+              "EndOffset": 192,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 0
+            },
+            {
+              "Line": 32,
+              "Offset": 332,
+              "EndOffset": 334,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 0
+            },
+            {
+              "Line": 22,
+              "Offset": 14,
+              "EndOffset": 371,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 32,
+              "Offset": 332,
+              "EndOffset": 400,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 0
+            },
+            {
+              "Line": 27,
+              "Offset": 185,
+              "EndOffset": 418,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            }
+          ]
+        }
+      }
+    },
+    "/home/armin/code/Blockchain/csharp/BlockChain/OrderedContractResolver.cs": {
+      "BlockChain.OrderedContractResolver": {
+        "System.Collections.Generic.IList`1<Newtonsoft.Json.Serialization.JsonProperty> BlockChain.OrderedContractResolver::CreateProperties(System.Type,Newtonsoft.Json.MemberSerialization)": {
+          "Lines": {
+            "12": 70,
+            "13": 70,
+            "14": 162,
+            "15": 70,
+            "16": 70
+          },
+          "Branches": [
+            {
+              "Line": 13,
+              "Offset": 15,
+              "EndOffset": 17,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 13,
+              "Offset": 15,
+              "EndOffset": 40,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 70
+            }
+          ]
+        }
+      }
+    },
+    "/home/armin/code/Blockchain/csharp/BlockChain/Program.cs": {
+      "BlockChain.Program": {
+        "System.Void BlockChain.Program::Main(System.String[])": {
+          "Lines": {
+            "16": 0,
+            "17": 0,
+            "18": 0
+          },
+          "Branches": []
+        },
+        "Microsoft.AspNetCore.Hosting.IWebHostBuilder BlockChain.Program::CreateWebHostBuilder(System.String[])": {
+          "Lines": {
+            "21": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "26": 0,
+            "28": 0,
+            "29": 0,
+            "30": 0,
+            "31": 0,
+            "32": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/home/armin/code/Blockchain/csharp/BlockChain/Startup.cs": {
+      "BlockChain.Startup": {
+        "Microsoft.Extensions.Configuration.IConfiguration BlockChain.Startup::get_Configuration()": {
+          "Lines": {
+            "27": 0
+          },
+          "Branches": []
+        },
+        "System.Void BlockChain.Startup::ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)": {
+          "Lines": {
+            "30": 0,
+            "31": 0,
+            "32": 0,
+            "33": 0,
+            "34": 0
+          },
+          "Branches": []
+        },
+        "System.Void BlockChain.Startup::Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IHostingEnvironment)": {
+          "Lines": {
+            "37": 0,
+            "38": 0,
+            "39": 0,
+            "40": 0
+          },
+          "Branches": []
+        },
+        "BlockChain.Domain.Model.Blockchain BlockChain.Startup::MakeBlockchain()": {
+          "Lines": {
+            "43": 0,
+            "44": 0,
+            "45": 0,
+            "46": 0,
+            "47": 0
+          },
+          "Branches": []
+        },
+        "System.Void BlockChain.Startup::.ctor(Microsoft.Extensions.Configuration.IConfiguration)": {
+          "Lines": {
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "25": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/home/armin/code/Blockchain/csharp/BlockChain/Domain/Extensions.cs": {
+      "BlockChain.Domain.Extensions": {
+        "System.String BlockChain.Domain.Extensions::AsJson(System.Object)": {
+          "Lines": {
+            "13": 40,
+            "14": 40,
+            "15": 40,
+            "16": 40,
+            "17": 40,
+            "18": 40,
+            "19": 40,
+            "21": 40,
+            "22": 40
+          },
+          "Branches": []
+        },
+        "T BlockChain.Domain.Extensions::FromJson(System.String)": {
+          "Lines": {
+            "25": 0,
+            "26": 0,
+            "27": 0
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.IReadOnlyCollection`1<T> BlockChain.Domain.Extensions::AsReadOnly(System.Collections.Generic.ICollection`1<T>)": {
+          "Lines": {
+            "30": 23,
+            "31": 23,
+            "32": 23
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/home/armin/code/Blockchain/csharp/BlockChain/Domain/Model/Block.cs": {
+      "BlockChain.Domain.Model.Block": {
+        "BlockChain.Domain.Model.Block BlockChain.Domain.Model.Block::Genesis()": {
+          "Lines": {
+            "50": 20,
+            "51": 20,
+            "52": 20
+          },
+          "Branches": []
+        },
+        "BlockChain.Domain.Model.Block BlockChain.Domain.Model.Block::Reconstitute(System.Int64,System.Int64,System.Int64,System.String,System.Collections.Generic.IEnumerable`1<BlockChain.Domain.Model.Transaction>)": {
+          "Lines": {
+            "55": 0,
+            "56": 0,
+            "57": 0
+          },
+          "Branches": []
+        },
+        "System.Int64 BlockChain.Domain.Model.Block::get_Index()": {
+          "Lines": {
+            "59": 18
+          },
+          "Branches": []
+        },
+        "System.Int64 BlockChain.Domain.Model.Block::get_Timestamp()": {
+          "Lines": {
+            "61": 10
+          },
+          "Branches": []
+        },
+        "BlockChain.Domain.Model.ProofOfWork BlockChain.Domain.Model.Block::get_Proof()": {
+          "Lines": {
+            "63": 20
+          },
+          "Branches": []
+        },
+        "BlockChain.Domain.Model.Sha256Hash BlockChain.Domain.Model.Block::get_PreviousHash()": {
+          "Lines": {
+            "65": 14
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.IReadOnlyCollection`1<BlockChain.Domain.Model.Transaction> BlockChain.Domain.Model.Block::get_Transactions()": {
+          "Lines": {
+            "67": 16
+          },
+          "Branches": []
+        },
+        "BlockChain.Domain.Model.Sha256Hash BlockChain.Domain.Model.Block::Hash()": {
+          "Lines": {
+            "70": 10,
+            "71": 10,
+            "72": 10,
+            "73": 10,
+            "74": 10,
+            "75": 10,
+            "76": 10,
+            "77": 10,
+            "78": 10
+          },
+          "Branches": []
+        },
+        "System.Boolean BlockChain.Domain.Model.Block::VerifyProofOfWork(BlockChain.Domain.Model.Block)": {
+          "Lines": {
+            "81": 0,
+            "82": 0,
+            "83": 0
+          },
+          "Branches": []
+        },
+        "System.Void BlockChain.Domain.Model.Block::.ctor(System.Int64,BlockChain.Domain.Model.ProofOfWork,BlockChain.Domain.Model.Sha256Hash,System.Collections.Generic.IEnumerable`1<BlockChain.Domain.Model.Transaction>,System.Nullable`1<System.Int64>)": {
+          "Lines": {
+            "17": 7,
+            "18": 7,
+            "19": 7,
+            "20": 0,
+            "21": 7,
+            "22": 0,
+            "23": 7,
+            "24": 0,
+            "25": 7,
+            "26": 0,
+            "27": 7,
+            "28": 0,
+            "33": 7,
+            "34": 7,
+            "35": 7,
+            "36": 7,
+            "37": 7,
+            "38": 7
+          },
+          "Branches": [
+            {
+              "Line": 19,
+              "Offset": 18,
+              "EndOffset": 20,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 19,
+              "Offset": 18,
+              "EndOffset": 31,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 7
+            },
+            {
+              "Line": 21,
+              "Offset": 38,
+              "EndOffset": 40,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 21,
+              "Offset": 38,
+              "EndOffset": 51,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 7
+            },
+            {
+              "Line": 23,
+              "Offset": 60,
+              "EndOffset": 62,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 23,
+              "Offset": 60,
+              "EndOffset": 73,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 7
+            },
+            {
+              "Line": 25,
+              "Offset": 82,
+              "EndOffset": 84,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 25,
+              "Offset": 82,
+              "EndOffset": 95,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 7
+            },
+            {
+              "Line": 27,
+              "Offset": 102,
+              "EndOffset": 104,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 0
+            },
+            {
+              "Line": 27,
+              "Offset": 102,
+              "EndOffset": 120,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 7
+            },
+            {
+              "Line": 27,
+              "Offset": 125,
+              "EndOffset": 127,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 0
+            },
+            {
+              "Line": 27,
+              "Offset": 125,
+              "EndOffset": 138,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 7
+            },
+            {
+              "Line": 34,
+              "Offset": 157,
+              "EndOffset": 159,
+              "Path": 0,
+              "Ordinal": 12,
+              "Hits": 7
+            },
+            {
+              "Line": 34,
+              "Offset": 157,
+              "EndOffset": 175,
+              "Path": 1,
+              "Ordinal": 13,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void BlockChain.Domain.Model.Block::.ctor()": {
+          "Lines": {
+            "40": 20,
+            "41": 20,
+            "42": 20,
+            "43": 20,
+            "44": 20,
+            "45": 20,
+            "46": 20,
+            "47": 20
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/home/armin/code/Blockchain/csharp/BlockChain/Domain/Model/Blockchain.cs": {
+      "BlockChain.Domain.Model.Blockchain": {
+        "System.Collections.Generic.IReadOnlyCollection`1<BlockChain.Domain.Model.Block> BlockChain.Domain.Model.Blockchain::get_Blocks()": {
+          "Lines": {
+            "29": 4
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.IReadOnlyCollection`1<BlockChain.Domain.Model.Transaction> BlockChain.Domain.Model.Blockchain::get_CurrentTransactions()": {
+          "Lines": {
+            "30": 3
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.ICollection`1<BlockChain.Domain.Model.Node> BlockChain.Domain.Model.Blockchain::get_Nodes()": {
+          "Lines": {
+            "31": 9
+          },
+          "Branches": []
+        },
+        "BlockChain.Domain.Model.Block BlockChain.Domain.Model.Blockchain::get_LastBlock()": {
+          "Lines": {
+            "32": 18
+          },
+          "Branches": []
+        },
+        "BlockChain.Domain.Model.Node BlockChain.Domain.Model.Blockchain::get_Self()": {
+          "Lines": {
+            "33": 6
+          },
+          "Branches": []
+        },
+        "System.Int64 BlockChain.Domain.Model.Blockchain::NewTransaction(BlockChain.Domain.Model.Node,BlockChain.Domain.Model.Node,System.Int64)": {
+          "Lines": {
+            "39": 6,
+            "40": 6,
+            "41": 4,
+            "42": 4,
+            "43": 4,
+            "44": 4
+          },
+          "Branches": []
+        },
+        "BlockChain.Domain.Model.Block BlockChain.Domain.Model.Blockchain::Mine()": {
+          "Lines": {
+            "53": 5,
+            "54": 5,
+            "56": 5,
+            "57": 5,
+            "58": 5
+          },
+          "Branches": []
+        },
+        "System.Void BlockChain.Domain.Model.Blockchain::Register(System.Uri)": {
+          "Lines": {
+            "64": 4,
+            "65": 4,
+            "66": 1,
+            "67": 3,
+            "68": 3,
+            "69": 2,
+            "70": 2,
+            "71": 2,
+            "72": 2,
+            "73": 3
+          },
+          "Branches": [
+            {
+              "Line": 65,
+              "Offset": 10,
+              "EndOffset": 12,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 65,
+              "Offset": 10,
+              "EndOffset": 23,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 3
+            },
+            {
+              "Line": 68,
+              "Offset": 47,
+              "EndOffset": 49,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 2
+            },
+            {
+              "Line": 68,
+              "Offset": 47,
+              "EndOffset": 81,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 3
+            }
+          ]
+        },
+        "System.Boolean BlockChain.Domain.Model.Blockchain::ResolveConflicts(System.Collections.Generic.IEnumerable`1<System.Collections.Generic.IList`1<BlockChain.Domain.Model.Block>>)": {
+          "Lines": {
+            "80": 0,
+            "81": 0,
+            "82": 0,
+            "83": 0,
+            "84": 0,
+            "85": 0,
+            "86": 0,
+            "87": 0,
+            "88": 0,
+            "90": 0,
+            "91": 0,
+            "92": 0,
+            "93": 0,
+            "94": 0,
+            "97": 0,
+            "98": 0
+          },
+          "Branches": [
+            {
+              "Line": 82,
+              "Offset": 65,
+              "EndOffset": 13,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 84,
+              "Offset": 38,
+              "EndOffset": 40,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 84,
+              "Offset": 38,
+              "EndOffset": 49,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 84,
+              "Offset": 52,
+              "EndOffset": 54,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 84,
+              "Offset": 52,
+              "EndOffset": 58,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 82,
+              "Offset": 65,
+              "EndOffset": 67,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 90,
+              "Offset": 88,
+              "EndOffset": 90,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 90,
+              "Offset": 88,
+              "EndOffset": 114,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 0
+            }
+          ]
+        },
+        "BlockChain.Domain.Model.Block BlockChain.Domain.Model.Blockchain::NewBlock(BlockChain.Domain.Model.ProofOfWork)": {
+          "Lines": {
+            "104": 8,
+            "105": 8,
+            "106": 1,
+            "108": 7,
+            "109": 7,
+            "110": 7,
+            "111": 7,
+            "112": 7,
+            "114": 7,
+            "115": 7,
+            "117": 7,
+            "119": 7,
+            "120": 7
+          },
+          "Branches": [
+            {
+              "Line": 105,
+              "Offset": 10,
+              "EndOffset": 12,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 105,
+              "Offset": 10,
+              "EndOffset": 23,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 7
+            }
+          ]
+        },
+        "System.Boolean BlockChain.Domain.Model.Blockchain::Validate(System.Collections.Generic.IList`1<BlockChain.Domain.Model.Block>)": {
+          "Lines": {
+            "126": 0,
+            "127": 0,
+            "128": 0,
+            "130": 0,
+            "131": 0,
+            "132": 0,
+            "133": 0,
+            "134": 0,
+            "136": 0,
+            "137": 0,
+            "139": 0,
+            "140": 0,
+            "141": 0,
+            "143": 0,
+            "144": 0
+          },
+          "Branches": [
+            {
+              "Line": 130,
+              "Offset": 88,
+              "EndOffset": 12,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 133,
+              "Offset": 40,
+              "EndOffset": 42,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 133,
+              "Offset": 40,
+              "EndOffset": 47,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 136,
+              "Offset": 61,
+              "EndOffset": 63,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 136,
+              "Offset": 61,
+              "EndOffset": 68,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 130,
+              "Offset": 88,
+              "EndOffset": 90,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void BlockChain.Domain.Model.Blockchain::.ctor(BlockChain.Domain.Model.Node)": {
+          "Lines": {
+            "21": 16,
+            "22": 16,
+            "23": 16,
+            "24": 16,
+            "25": 16,
+            "26": 16,
+            "27": 16
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/home/armin/code/Blockchain/csharp/BlockChain/Domain/Model/Challenge.cs": {
+      "BlockChain.Domain.Model.Challenge": {
+        "BlockChain.Domain.Model.ProofOfWork BlockChain.Domain.Model.Challenge::Solve(BlockChain.Domain.Model.ProofOfWork)": {
+          "Lines": {
+            "6": 5,
+            "7": 5,
+            "9": 363045,
+            "10": 363040,
+            "11": 5,
+            "12": 5
+          },
+          "Branches": [
+            {
+              "Line": 9,
+              "Offset": 29,
+              "EndOffset": 5,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 363040
+            },
+            {
+              "Line": 9,
+              "Offset": 29,
+              "EndOffset": 31,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 5
+            }
+          ]
+        }
+      }
+    },
+    "/home/armin/code/Blockchain/csharp/BlockChain/Domain/Model/Entity.cs": {
+      "BlockChain.Domain.Model.Entity`1": {
+        "TId BlockChain.Domain.Model.Entity`1::get_Id()": {
+          "Lines": {
+            "19": 0
+          },
+          "Branches": []
+        },
+        "System.Boolean BlockChain.Domain.Model.Entity`1::Equals(BlockChain.Domain.Model.Entity`1<TId>)": {
+          "Lines": {
+            "23": 0,
+            "24": 0,
+            "25": 0,
+            "26": 0,
+            "28": 0,
+            "29": 0
+          },
+          "Branches": [
+            {
+              "Line": 24,
+              "Offset": 7,
+              "EndOffset": 9,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 24,
+              "Offset": 7,
+              "EndOffset": 14,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Boolean BlockChain.Domain.Model.Entity`1::Equals(System.Object)": {
+          "Lines": {
+            "32": 0,
+            "33": 0,
+            "34": 0,
+            "35": 0,
+            "36": 0,
+            "38": 0,
+            "39": 0
+          },
+          "Branches": [
+            {
+              "Line": 34,
+              "Offset": 14,
+              "EndOffset": 16,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 34,
+              "Offset": 14,
+              "EndOffset": 27,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Int32 BlockChain.Domain.Model.Entity`1::GetHashCode()": {
+          "Lines": {
+            "42": 0,
+            "43": 0,
+            "44": 0
+          },
+          "Branches": []
+        },
+        "System.String BlockChain.Domain.Model.Entity`1::ToString()": {
+          "Lines": {
+            "47": 0,
+            "48": 0,
+            "49": 0
+          },
+          "Branches": []
+        },
+        "System.Void BlockChain.Domain.Model.Entity`1::.ctor(TId)": {
+          "Lines": {
+            "10": 16,
+            "11": 16,
+            "12": 16,
+            "13": 0,
+            "14": 16,
+            "15": 16
+          },
+          "Branches": [
+            {
+              "Line": 12,
+              "Offset": 35,
+              "EndOffset": 37,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 12,
+              "Offset": 35,
+              "EndOffset": 53,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 16
+            }
+          ]
+        }
+      }
+    },
+    "/home/armin/code/Blockchain/csharp/BlockChain/Domain/Model/Node.cs": {
+      "BlockChain.Domain.Model.Node": {
+        "System.Uri BlockChain.Domain.Model.Node::get_Address()": {
+          "Lines": {
+            "19": 14
+          },
+          "Branches": []
+        },
+        "BlockChain.Domain.Model.Node BlockChain.Domain.Model.Node::Default()": {
+          "Lines": {
+            "22": 25,
+            "23": 25,
+            "24": 25
+          },
+          "Branches": []
+        },
+        "System.Void BlockChain.Domain.Model.Node::.ctor(System.Uri)": {
+          "Lines": {
+            "9": 30,
+            "10": 30,
+            "11": 30,
+            "12": 30
+          },
+          "Branches": []
+        },
+        "System.Void BlockChain.Domain.Model.Node::.ctor(System.String)": {
+          "Lines": {
+            "15": 27,
+            "16": 27,
+            "17": 27
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/home/armin/code/Blockchain/csharp/BlockChain/Domain/Model/ProofOfWork.cs": {
+      "BlockChain.Domain.Model.ProofOfWork": {
+        "System.Int64 BlockChain.Domain.Model.ProofOfWork::get_Proof()": {
+          "Lines": {
+            "16": 726090
+          },
+          "Branches": []
+        },
+        "System.Boolean BlockChain.Domain.Model.ProofOfWork::Verify(BlockChain.Domain.Model.ProofOfWork)": {
+          "Lines": {
+            "19": 363045,
+            "20": 363045,
+            "21": 0,
+            "23": 363045,
+            "24": 363045,
+            "25": 363045,
+            "26": 363045
+          },
+          "Branches": [
+            {
+              "Line": 20,
+              "Offset": 10,
+              "EndOffset": 12,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 20,
+              "Offset": 10,
+              "EndOffset": 23,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 363045
+            }
+          ]
+        },
+        "System.Void BlockChain.Domain.Model.ProofOfWork::.ctor(System.Int64)": {
+          "Lines": {
+            "9": 363072,
+            "10": 363072,
+            "11": 363072,
+            "12": 0,
+            "13": 363072,
+            "14": 363072
+          },
+          "Branches": [
+            {
+              "Line": 11,
+              "Offset": 15,
+              "EndOffset": 17,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 11,
+              "Offset": 15,
+              "EndOffset": 28,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 363072
+            }
+          ]
+        }
+      }
+    },
+    "/home/armin/code/Blockchain/csharp/BlockChain/Domain/Model/Sha256Hash.cs": {
+      "BlockChain.Domain.Model.Sha256Hash": {
+        "System.Boolean BlockChain.Domain.Model.Sha256Hash::StartsWith(System.String)": {
+          "Lines": {
+            "23": 363045,
+            "24": 363045,
+            "25": 0,
+            "27": 363045,
+            "28": 363045
+          },
+          "Branches": [
+            {
+              "Line": 24,
+              "Offset": 9,
+              "EndOffset": 11,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 24,
+              "Offset": 9,
+              "EndOffset": 22,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 363045
+            }
+          ]
+        },
+        "BlockChain.Domain.Model.Sha256Hash BlockChain.Domain.Model.Sha256Hash::Of(System.String)": {
+          "Lines": {
+            "31": 363076,
+            "32": 363076,
+            "33": 363076,
+            "34": 363076,
+            "35": 363076,
+            "36": 363076,
+            "37": 24326092,
+            "38": 11618432,
+            "39": 363076,
+            "40": 363076,
+            "41": 363076,
+            "42": 363076
+          },
+          "Branches": [
+            {
+              "Line": 37,
+              "Offset": 83,
+              "EndOffset": 45,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 11618432
+            },
+            {
+              "Line": 37,
+              "Offset": 83,
+              "EndOffset": 85,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 363076
+            }
+          ]
+        },
+        "System.String BlockChain.Domain.Model.Sha256Hash::ToString()": {
+          "Lines": {
+            "45": 0,
+            "46": 0,
+            "47": 0
+          },
+          "Branches": []
+        },
+        "System.Void BlockChain.Domain.Model.Sha256Hash::.ctor(System.String)": {
+          "Lines": {
+            "12": 363076,
+            "13": 363076,
+            "14": 363076,
+            "15": 0,
+            "16": 363076,
+            "17": 0,
+            "19": 363076,
+            "20": 363076
+          },
+          "Branches": [
+            {
+              "Line": 14,
+              "Offset": 16,
+              "EndOffset": 18,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 14,
+              "Offset": 16,
+              "EndOffset": 29,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 363076
+            },
+            {
+              "Line": 16,
+              "Offset": 45,
+              "EndOffset": 47,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 16,
+              "Offset": 45,
+              "EndOffset": 58,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 363076
+            }
+          ]
+        }
+      }
+    },
+    "/home/armin/code/Blockchain/csharp/BlockChain/Domain/Model/Transaction.cs": {
+      "BlockChain.Domain.Model.Transaction": {
+        "BlockChain.Domain.Model.Node BlockChain.Domain.Model.Transaction::get_Sender()": {
+          "Lines": {
+            "23": 6
+          },
+          "Branches": []
+        },
+        "BlockChain.Domain.Model.Node BlockChain.Domain.Model.Transaction::get_Recepient()": {
+          "Lines": {
+            "25": 6
+          },
+          "Branches": []
+        },
+        "System.Int64 BlockChain.Domain.Model.Transaction::get_Amount()": {
+          "Lines": {
+            "27": 6
+          },
+          "Branches": []
+        },
+        "System.Void BlockChain.Domain.Model.Transaction::.ctor(BlockChain.Domain.Model.Node,BlockChain.Domain.Model.Node,System.Int64)": {
+          "Lines": {
+            "11": 11,
+            "12": 11,
+            "13": 11,
+            "14": 1,
+            "15": 10,
+            "16": 1,
+            "18": 9,
+            "19": 9,
+            "20": 9,
+            "21": 9
+          },
+          "Branches": [
+            {
+              "Line": 13,
+              "Offset": 17,
+              "EndOffset": 19,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 13,
+              "Offset": 17,
+              "EndOffset": 30,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 10
+            },
+            {
+              "Line": 15,
+              "Offset": 40,
+              "EndOffset": 42,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 1
+            },
+            {
+              "Line": 15,
+              "Offset": 40,
+              "EndOffset": 53,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 9
+            }
+          ]
+        }
+      }
+    },
+    "/home/armin/code/Blockchain/csharp/BlockChain/Domain/Model/ValueObject.cs": {
+      "BlockChain.Domain.Model.ValueObject": {
+        "System.Boolean BlockChain.Domain.Model.ValueObject::Equals(BlockChain.Domain.Model.ValueObject)": {
+          "Lines": {
+            "9": 15,
+            "10": 15,
+            "11": 0,
+            "12": 0,
+            "15": 15,
+            "16": 15
+          },
+          "Branches": [
+            {
+              "Line": 10,
+              "Offset": 10,
+              "EndOffset": 12,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 10,
+              "Offset": 10,
+              "EndOffset": 17,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 15
+            }
+          ]
+        },
+        "System.Boolean BlockChain.Domain.Model.ValueObject::Equals(System.Object)": {
+          "Lines": {
+            "19": 15,
+            "20": 15,
+            "21": 15,
+            "22": 15,
+            "23": 15,
+            "25": 0,
+            "26": 15
+          },
+          "Branches": [
+            {
+              "Line": 21,
+              "Offset": 17,
+              "EndOffset": 19,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 15
+            },
+            {
+              "Line": 21,
+              "Offset": 17,
+              "EndOffset": 30,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Int32 BlockChain.Domain.Model.ValueObject::GetHashCode()": {
+          "Lines": {
+            "29": 0,
+            "30": 0,
+            "31": 0
+          },
+          "Branches": []
+        },
+        "System.String BlockChain.Domain.Model.ValueObject::ToString()": {
+          "Lines": {
+            "34": 0,
+            "35": 0,
+            "36": 0
+          },
+          "Branches": []
+        },
+        "System.Boolean BlockChain.Domain.Model.ValueObject::op_Equality(BlockChain.Domain.Model.ValueObject,BlockChain.Domain.Model.ValueObject)": {
+          "Lines": {
+            "39": 363108,
+            "40": 363110,
+            "41": 726212,
+            "43": 0,
+            "44": 363108
+          },
+          "Branches": [
+            {
+              "Line": 40,
+              "Offset": 7,
+              "EndOffset": 9,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 2
+            },
+            {
+              "Line": 40,
+              "Offset": 7,
+              "EndOffset": 13,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 363106
+            },
+            {
+              "Line": 41,
+              "Offset": 14,
+              "EndOffset": 16,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 363106
+            },
+            {
+              "Line": 41,
+              "Offset": 14,
+              "EndOffset": 22,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 41,
+              "Offset": 25,
+              "EndOffset": 27,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 363106
+            },
+            {
+              "Line": 41,
+              "Offset": 25,
+              "EndOffset": 31,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Boolean BlockChain.Domain.Model.ValueObject::op_Inequality(BlockChain.Domain.Model.ValueObject,BlockChain.Domain.Model.ValueObject)": {
+          "Lines": {
+            "46": 15
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/home/armin/code/Blockchain/csharp/BlockChain/Domain/Events/DomainEvents.cs": {
+      "BlockChain.Domain.Events.DomainEvents": {
+        "System.Void BlockChain.Domain.Events.DomainEvents::Raise(TEvent)": {
+          "Lines": {
+            "6": 13,
+            "10": 13
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/home/armin/code/Blockchain/csharp/BlockChain/Domain/Events/NewTransactionCreatedEvent.cs": {
+      "BlockChain.Domain.Events.NewTransactionCreatedEvent": {
+        "System.Void BlockChain.Domain.Events.NewTransactionCreatedEvent::.ctor(BlockChain.Domain.Model.Node,BlockChain.Domain.Model.Node,System.Int64)": {
+          "Lines": {
+            "11": 4,
+            "12": 4,
+            "13": 4,
+            "14": 4,
+            "15": 4,
+            "16": 4
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/home/armin/code/Blockchain/csharp/BlockChain/Domain/Events/NodeRegisteredEvent.cs": {
+      "BlockChain.Domain.Events.NodeRegisteredEvent": {
+        "System.Void BlockChain.Domain.Events.NodeRegisteredEvent::.ctor(System.Uri)": {
+          "Lines": {
+            "9": 2,
+            "10": 2,
+            "11": 2,
+            "12": 2
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/home/armin/code/Blockchain/csharp/BlockChain/Domain/Model/BlockchainReplacedEvent.cs": {
+      "BlockChain.Domain.Events.BlockchainReplacedEvent": {
+        "System.Void BlockChain.Domain.Events.BlockchainReplacedEvent::.ctor()": {
+          "Lines": {
+            "5": 0,
+            "6": 0,
+            "7": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/home/armin/code/Blockchain/csharp/BlockChain/Domain/Model/NewBlockForgedEvent.cs": {
+      "BlockChain.Domain.Events.NewBlockForgedEvent": {
+        "System.Void BlockChain.Domain.Events.NewBlockForgedEvent::.ctor()": {
+          "Lines": {
+            "5": 7,
+            "6": 7,
+            "7": 7
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/home/armin/code/Blockchain/csharp/BlockChain/Controllers/BlockchainController.cs": {
+      "BlockChain.Controllers.BlockchainsController": {
+        "System.Object BlockChain.Controllers.BlockchainsController::Get()": {
+          "Lines": {
+            "31": 0,
+            "32": 0,
+            "33": 0,
+            "34": 0,
+            "35": 0,
+            "36": 0,
+            "37": 0
+          },
+          "Branches": []
+        },
+        "System.Object BlockChain.Controllers.BlockchainsController::CreateTransaction(System.Object)": {
+          "Lines": {
+            "42": 0,
+            "43": 0,
+            "44": 0,
+            "46": 0,
+            "47": 0,
+            "48": 0,
+            "49": 0,
+            "50": 0,
+            "51": 0
+          },
+          "Branches": [
+            {
+              "Line": 43,
+              "Offset": 6,
+              "EndOffset": 10,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 43,
+              "Offset": 6,
+              "EndOffset": 54,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 43,
+              "Offset": 74,
+              "EndOffset": 78,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 43,
+              "Offset": 74,
+              "EndOffset": 122,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 43,
+              "Offset": 142,
+              "EndOffset": 146,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 43,
+              "Offset": 142,
+              "EndOffset": 224,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 43,
+              "Offset": 272,
+              "EndOffset": 274,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 43,
+              "Offset": 272,
+              "EndOffset": 286,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 0
+            },
+            {
+              "Line": 46,
+              "Offset": 291,
+              "EndOffset": 295,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 0
+            },
+            {
+              "Line": 46,
+              "Offset": 291,
+              "EndOffset": 373,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 0
+            },
+            {
+              "Line": 46,
+              "Offset": 399,
+              "EndOffset": 403,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 0
+            },
+            {
+              "Line": 46,
+              "Offset": 399,
+              "EndOffset": 450,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 0
+            },
+            {
+              "Line": 46,
+              "Offset": 476,
+              "EndOffset": 480,
+              "Path": 1,
+              "Ordinal": 13,
+              "Hits": 0
+            },
+            {
+              "Line": 46,
+              "Offset": 476,
+              "EndOffset": 527,
+              "Path": 0,
+              "Ordinal": 12,
+              "Hits": 0
+            },
+            {
+              "Line": 46,
+              "Offset": 553,
+              "EndOffset": 557,
+              "Path": 1,
+              "Ordinal": 15,
+              "Hits": 0
+            },
+            {
+              "Line": 46,
+              "Offset": 553,
+              "EndOffset": 604,
+              "Path": 0,
+              "Ordinal": 14,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Object BlockChain.Controllers.BlockchainsController::Mine()": {
+          "Lines": {
+            "56": 0,
+            "57": 0,
+            "58": 0,
+            "59": 0,
+            "60": 0,
+            "61": 0,
+            "62": 0,
+            "63": 0,
+            "64": 0,
+            "65": 0,
+            "66": 0
+          },
+          "Branches": []
+        },
+        "System.Object BlockChain.Controllers.BlockchainsController::Register(System.String)": {
+          "Lines": {
+            "71": 0,
+            "72": 0,
+            "73": 0,
+            "75": 0,
+            "77": 0,
+            "78": 0,
+            "79": 0,
+            "80": 0,
+            "81": 0,
+            "82": 0
+          },
+          "Branches": [
+            {
+              "Line": 72,
+              "Offset": 12,
+              "EndOffset": 14,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 72,
+              "Offset": 12,
+              "EndOffset": 28,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Object BlockChain.Controllers.BlockchainsController::Resolve()": {
+          "Lines": {
+            "87": 0,
+            "89": 0,
+            "90": 0,
+            "91": 0,
+            "92": 0,
+            "93": 0,
+            "94": 0,
+            "95": 0,
+            "96": 0,
+            "97": 0,
+            "100": 0,
+            "101": 0,
+            "102": 0,
+            "103": 0,
+            "104": 0,
+            "105": 0
+          },
+          "Branches": [
+            {
+              "Line": 91,
+              "Offset": 40,
+              "EndOffset": 42,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 91,
+              "Offset": 40,
+              "EndOffset": 67,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void BlockChain.Controllers.BlockchainsController::.ctor(BlockChain.Domain.Model.Blockchain,BlockChain.IBlockchainApiClient)": {
+          "Lines": {
+            "18": 0,
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "25": 0,
+            "26": 0
+          },
+          "Branches": [
+            {
+              "Line": 20,
+              "Offset": 14,
+              "EndOffset": 16,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 20,
+              "Offset": 14,
+              "EndOffset": 27,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 22,
+              "Offset": 33,
+              "EndOffset": 35,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 22,
+              "Offset": 33,
+              "EndOffset": 46,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            }
+          ]
+        }
+      }
+    }
+  }
+}

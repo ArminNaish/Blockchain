@@ -30,6 +30,7 @@ namespace BlockChain.Domain.Model
         public IReadOnlyCollection<Transaction> CurrentTransactions => currentTransactions.AsReadOnly();
         public ICollection<Node> Nodes => nodes;
         internal Block LastBlock => blocks.Last();
+        internal Node Self => self;
 
         /// <summary>
         /// Creates a new transaction to go into the next mined block
@@ -52,7 +53,7 @@ namespace BlockChain.Domain.Model
         {
             var proof = new Challenge().Solve(LastBlock.Proof);
             // the sender is 'null' to signify that this node has mined a new coin.
-            currentTransactions.Add(new Transaction(null, self, 1));
+            currentTransactions.Add(new Transaction(null, Self, 1));
             return NewBlock(proof);
         }
 

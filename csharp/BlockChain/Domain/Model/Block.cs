@@ -64,13 +64,7 @@ namespace BlockChain.Domain.Model
 
         public Sha256Hash PreviousHash => previousHash;
 
-        public IReadOnlyCollection<Transaction> Transactions
-        {
-            get
-            {
-                return new List<Transaction>(transactions).AsReadOnly();
-            }
-        }
+        public IReadOnlyCollection<Transaction> Transactions => transactions.AsReadOnly();
 
         public Sha256Hash Hash()
         {
