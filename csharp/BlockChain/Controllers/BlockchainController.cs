@@ -31,8 +31,8 @@ namespace BlockChain.Controllers
         {
             return new
             {
-                chain = blockchain.Blocks,
-                length = blockchain.Blocks.Count
+                chain = blockchain.Chain,
+                length = blockchain.Chain.Count
             };
         }
 
@@ -93,14 +93,14 @@ namespace BlockChain.Controllers
                 return new
                 {
                     message = "Our chain was replaced",
-                    new_chain = blockchain.Blocks
+                    new_chain = blockchain.Chain
                 };
             }
 
             return new
             {
                 message = "Our chain is authoritative",
-                chain = blockchain.Blocks
+                chain = blockchain.Chain
             };
         }
     }

@@ -1,48 +1,81 @@
 using System;
+using System.Linq;
+using System.Reflection;
 using Newtonsoft.Json;
 
 namespace BlockChain.Domain.Model
 {
     public abstract class ValueObject : IEquatable<ValueObject>
     {
+        private readonly BindingFlags flags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
+
         public bool Equals(ValueObject other)
         {
             if (other == null)
-            {
                 return false;
-            }
 
-            return this.AsJson() == other.AsJson();
+            Type type = GetType();
+            Type otherType = other.GetType();
+
+            if (type != otherType)
+                return false;
+
+            return type.GetFields(flags)
+                .Select(field => new
+                {
+                    thisValue = field.GetValue(this),
+                    otherValue = field.GetValue(other)
+                })
+                .All(field => object.Equals(field.thisValue, field.otherValue));
         }
 
         public override bool Equals(object obj)
         {
-            var entity = obj as ValueObject;
-            if (entity != null)
-            {
-                return this.Equals(entity);
-            }
-            return base.Equals(obj);
+            if (obj == null)
+                return false;
+
+            var other = obj as ValueObject;
+            return Equals(other);
         }
 
         public override int GetHashCode()
         {
-            return this.AsJson().GetHashCode();
+            int hashCode = 17;
+            int multiplier = 59;
+
+            var type = GetType();
+            type.GetFields(flags)
+                .Select(field => field.GetValue(this))
+                .Where(value => value != null)
+                .ToList()
+                .ForEach(value => {
+                    hashCode = hashCode * multiplier + value.GetHashCode();
+                });
+
+            return hashCode;
         }
 
         public override string ToString()
         {
-            return this.AsJson();
+            var type = GetType();
+            return type.GetProperties(flags)
+                .Select(prop => new {
+                    Name = prop.Name, 
+                    Value = prop.GetValue(this)
+                })
+                .ToList()
+                .AsJson();
         }
 
         public static bool operator ==(ValueObject a, ValueObject b)
         {
-            if (ReferenceEquals(a, b)) return true;
-            if (((object)a == null) || ((object)b == null)) return false;
-
-            return a.AsJson() == b.AsJson();
+            return object.Equals(a,b);
         }
 
-        public static bool operator !=(ValueObject a, ValueObject b) => !(a == b);
+        public static bool operator !=(ValueObject a, ValueObject b)
+        {
+            return !(a == b);
+        }
+
     }
 }

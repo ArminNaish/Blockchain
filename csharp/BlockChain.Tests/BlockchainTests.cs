@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using BlockChain.Domain;
 using BlockChain.Domain.Model;
@@ -9,52 +10,8 @@ namespace BlockChain.Tests
 {
     public class BlockchainTests
     {
-        #region TestRegisterNodes
-        [Fact]
-        public void Should_Register_Address_In_Blockchain()
-        {
-            // arrange
-            var address = "http://127.0.0.1:9999/";
-            var expected = new Node(address);
-            var blockchain = MakeBlockchain();
-
-            // act
-            blockchain.Register(new Uri(address));
-
-            // assert
-            blockchain.Nodes.Should().HaveCount(1);
-            blockchain.Nodes.Should().Contain(expected);
-        }
-
-        [Fact]
-        public void Should_Register_Address_Idempotently()
-        {
-            // arrange
-            var address = "http://127.0.0.1:9999/";
-            var expected = new Node(address);
-            var blockchain = MakeBlockchain();
-
-            // act
-            blockchain.Register(new Uri(address));
-            blockchain.Register(new Uri(address));
-
-            // assert
-            blockchain.Nodes.Should().HaveCount(1);
-            blockchain.Nodes.Should().Contain(expected);
-        }
-
-        [Fact]
-        public void Should_Throw_Exception_When_Address_Is_Null()
-        {
-            var blockchain = MakeBlockchain();
-            blockchain
-                .Invoking(b => b.Register(null))
-                .Should()
-                .Throw<ArgumentNullException>();
-        }
-        #endregion
-
-        #region TestBlockCreation
+      
+        #region TestInitialization
         [Fact]
         public void Should_Create_Genesis_Block()
         {
@@ -62,11 +19,11 @@ namespace BlockChain.Tests
             var expected = Block.Genesis();
 
             // act
-            var blockchain = MakeBlockchain();
-            var actual = blockchain.Blocks.First();
+            var blockchain = new Blockchain();
+            var actual = blockchain.Chain.First();
 
             // assert
-            blockchain.Blocks.Should().HaveCount(1);
+            blockchain.Chain.Should().HaveCount(1);
             actual.Should().NotBeNull();
             actual.Index.Should().Be(1);
             actual.Proof.Should().Be(new ProofOfWork(1));
@@ -74,60 +31,14 @@ namespace BlockChain.Tests
             actual.Transactions.Should().BeEmpty();
         }
 
-        [Fact]
-        public void Should_Create_New_Block()
-        {
-            // arrange
-            var blockchain = MakeBlockchain();
-
-            // act
-            var actual = blockchain.NewBlock(new ProofOfWork(123));
-
-            // assert
-            blockchain.Blocks.Should().HaveCount(2);
-            actual.Should().NotBeNull();
-            actual.Index.Should().Be(2);
-            actual.Proof.Should().Be(new ProofOfWork(123));
-            actual.PreviousHash.Should().Be(Block.Genesis().Hash());
-            actual.Transactions.Should().BeEmpty();
-        }
-
-        [Fact]
-        public void Should_Return_Last_Block()
-        {
-            // arrange
-            var blockchain = MakeBlockchain();
-            blockchain.NewBlock(new ProofOfWork(123));
-
-            // act
-            var actual = blockchain.LastBlock;
-
-            // assert
-            blockchain.Blocks.Should().HaveCount(2);
-            actual.Should().NotBeNull();
-            actual.Index.Should().Be(2);
-            actual.Proof.Should().Be(new ProofOfWork(123));
-            actual.PreviousHash.Should().Be(Block.Genesis().Hash());
-            actual.Transactions.Should().BeEmpty();
-        }
-
-        [Fact]
-        public void Should_Throw_Exception_When_Proof_Is_Null()
-        {
-            var blockchain = MakeBlockchain();
-            blockchain
-                .Invoking(b => b.NewBlock(null))
-                .Should()
-                .Throw<ArgumentNullException>();
-        }
         #endregion
 
-        #region TestTransactionCreation
+        #region TestTransactionCreationSha256Hash.Of(Sha256Hash.Of(Sha256Hash.Of(Sha256Hash.Of(
         [Fact]
         public void Should_Create_New_Transaction()
         {
             // arrange
-            var blockchain = MakeBlockchain();
+            var blockchain = new Blockchain();
             var sender = Node.Default();
             var recipient = Node.Default();
 
@@ -147,7 +58,7 @@ namespace BlockChain.Tests
         public void Should_Return_Index_Of_Next_Block()
         {
             // arrange
-            var blockchain = MakeBlockchain();
+            var blockchain = new Blockchain();
             var sender = Node.Default();
             var recipient = Node.Default();
 
@@ -161,7 +72,7 @@ namespace BlockChain.Tests
         [Fact]
         public void Should_Throw_Exception_When_Recipient_Is_Null()
         {
-            var blockchain = MakeBlockchain();
+            var blockchain = new Blockchain();
             blockchain
                 .Invoking(b => b.NewTransaction(Node.Default(), null, 1))
                 .Should()
@@ -171,7 +82,7 @@ namespace BlockChain.Tests
         [Fact]
         public void Should_Throw_Exception_When_Amount_Is_Negative()
         {
-            var blockchain = MakeBlockchain();
+            var blockchain = new Blockchain();
             blockchain
                 .Invoking(b => b.NewTransaction(Node.Default(), Node.Default(), -1))
                 .Should()
@@ -184,8 +95,8 @@ namespace BlockChain.Tests
         public void Should_Calculate_Proof_Of_Work()
         {
             // arrange
-            var blockchain = MakeBlockchain();
-            var genesis = blockchain.LastBlock;
+            var blockchain = new Blockchain();
+            var genesis = blockchain.Chain.First();
             var expected = new ProofOfWork(72608);
 
             // act
@@ -199,7 +110,7 @@ namespace BlockChain.Tests
         public void Should_Reward_Miner_With_Transaction()
         {
             // arrange 
-            var blockchain = MakeBlockchain();
+            var blockchain = new Blockchain();
 
             // act
             var block = blockchain.Mine();
@@ -208,7 +119,7 @@ namespace BlockChain.Tests
             // assert
             actual.Should().NotBeNull();
             actual.Sender.Should().BeNull();
-            actual.Recepient.Should().Be(blockchain.Self);
+            actual.Recepient.Should().Be(Node.Default());
             actual.Amount.Should().Be(1);
         }
 
@@ -216,7 +127,7 @@ namespace BlockChain.Tests
         public void Should_Forge_New_Block()
         {
             // arrange 
-            var blockchain = MakeBlockchain();
+            var blockchain = new Blockchain();
 
             // act
             var actual = blockchain.Mine();
@@ -224,8 +135,8 @@ namespace BlockChain.Tests
             // assert
             actual.Should().NotBeNull();
             actual.Index.Should().Be(2);
-            actual.Proof.Should().Be(new ProofOfWork(123));
-            actual.PreviousHash.Should().Be(Block.Genesis().Hash());
+            actual.Proof.Should().Be(new ProofOfWork(72608));
+            actual.PreviousHash.Should().Be(blockchain.Chain.First().Hash());
             actual.Transactions.Should().HaveCount(1);
         }
 
@@ -233,7 +144,7 @@ namespace BlockChain.Tests
         public void Should_Reset_Transactions()
         {
             // arrange
-            var blockchain = MakeBlockchain();
+            var blockchain = new Blockchain();
 
             // act
             blockchain.Mine();
@@ -246,7 +157,7 @@ namespace BlockChain.Tests
         public void Should_Add_Transactions_To_New_Block()
         {
             // arrange
-            var blockchain = MakeBlockchain();
+            var blockchain = new Blockchain();
             var sender = Node.Default();
             var recipient = Node.Default();
 
@@ -261,19 +172,118 @@ namespace BlockChain.Tests
         #endregion
 
         #region TestRegistration
-        #endregion
+        [Fact]
+        public void Should_Register_Address_In_Blockchain()
+        {
+            // arrange
+            var address = "http://127.0.0.1:9999/";
+            var expected = new Node(address);
+            var blockchain = new Blockchain();
 
-        #region TestBlockchainValidation
+            // act
+            blockchain.Register(new Uri(address));
+
+            // assert
+            blockchain.Nodes.Should().HaveCount(1);
+            blockchain.Nodes.Should().Contain(expected);
+        }
+
+        [Fact]
+        public void Should_Register_Address_Idempotently()
+        {
+            // arrange
+            var address = "http://127.0.0.1:9999/";
+            var expected = new Node(address);
+            var blockchain = new Blockchain();
+
+            // act
+            blockchain.Register(new Uri(address));
+            blockchain.Register(new Uri(address));
+
+            // assert
+            blockchain.Nodes.Should().HaveCount(1);
+            blockchain.Nodes.Should().Contain(expected);
+        }
+
+        [Fact]
+        public void Should_Throw_Exception_When_Address_Is_Null()
+        {
+            var blockchain = new Blockchain();
+            blockchain
+                .Invoking(b => b.Register(null))
+                .Should()
+                .Throw<ArgumentNullException>();
+        }
         #endregion
 
         #region TestConsensusAlgorithm
-        #endregion
-
-        private static Blockchain MakeBlockchain()
+        [Fact]
+        public void Should_Replace_Chain_With_Longest_On_Network()
         {
-            var self = Node.Default();
-            var blockchain = new Blockchain(self);
-            return blockchain;
+            // arrange
+            var blockchain = new Blockchain(new Node(@"http://127.0.0.1/5001"));
+            var longerBlockchain = new Blockchain(new Node(@"http://127.0.0.1/5002"));
+            longerBlockchain.NewTransaction(Node.Default(),Node.Default(),2);
+            longerBlockchain.Mine();
+            var otherChains = new List<Block>(longerBlockchain.Chain);
+
+            // act
+            var actual = blockchain.ResolveConflicts(new[]{otherChains});
+
+            // assert
+            actual.Should().Be(true);
+            blockchain.Chain.Should().Equal(longerBlockchain.Chain); // bug
         }
+
+        [Fact]
+        public void Should_Discard_Shorter_Blockchain()
+        {
+            // arrange
+            var blockchain = new Blockchain(new Node(@"http://127.0.0.1/5001"));
+            blockchain.NewTransaction(Node.Default(),Node.Default(),2);
+            blockchain.Mine();
+            var shorterBlockchain = new Blockchain(new Node(@"http://127.0.0.1/5002"));
+           
+            var otherChains = new List<Block>(shorterBlockchain.Chain);
+
+            // act
+            var actual = blockchain.ResolveConflicts(new[]{otherChains});
+
+            // assert
+            actual.Should().Be(false);
+            blockchain.Chain.Should().NotBeEmpty();
+            blockchain.Chain.Should().NotEqual(shorterBlockchain.Chain); // bug
+        }
+
+        [Fact]
+        public void Should_Discard_Invalid_Blockchain()
+        {
+            // arrange
+            var genesis = Block.Genesis();
+            var secondBlock = MakeBlock(2, genesis);
+            var thirdBlock = MakeBlock(3, secondBlock);
+            var chain = new List<Block>
+            {
+                genesis, secondBlock, thirdBlock
+            };
+
+            // act
+            // todo: refactor to Blockchain.From(chain).Validate()
+            Blockchain.Validate(chain);
+
+            // assert
+        }
+
+        private static Block MakeBlock(long index, Block previousBlock)
+        {
+            return new Block(
+                index,
+                new Challenge().Solve(previousBlock.Proof),
+                previousBlock.Hash(),
+                new List<Transaction> {
+                    new Transaction(null, Node.Default(),1)
+                });
+        }
+        #endregion
     }
 }

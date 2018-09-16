@@ -13,24 +13,23 @@ namespace BlockChain.Domain.Model
 {
     public class Blockchain : Entity<Guid>, IAggregateRoot
     {
-        private IList<Block> blocks;
+        private readonly List<Block> chain;
         private readonly ICollection<Transaction> currentTransactions;
         private readonly ICollection<Node> nodes;
         private readonly Node self;
 
-        public Blockchain(Node self) : base(Guid.NewGuid())
+        public Blockchain(Node self = null) : base(Guid.NewGuid())
         {
-            this.blocks = new List<Block> { Block.Genesis()};
+            this.chain = new List<Block> { Block.Genesis()};
             this.currentTransactions = new List<Transaction>();
             this.nodes = new List<Node>();
-            this.self = self;
+            this.self = self ?? Node.Default();
         }
 
-        public IReadOnlyCollection<Block> Blocks => blocks.AsReadOnly();
+        public IReadOnlyCollection<Block> Chain => chain.AsReadOnly();
         public IReadOnlyCollection<Transaction> CurrentTransactions => currentTransactions.AsReadOnly();
         public ICollection<Node> Nodes => nodes;
-        internal Block LastBlock => blocks.Last();
-        internal Node Self => self;
+        private Block LastBlock => chain.Last();
 
         /// <summary>
         /// Creates a new transaction to go into the next mined block
@@ -53,7 +52,7 @@ namespace BlockChain.Domain.Model
         {
             var proof = new Challenge().Solve(LastBlock.Proof);
             // the sender is 'null' to signify that this node has mined a new coin.
-            currentTransactions.Add(new Transaction(null, Self, 1));
+            currentTransactions.Add(new Transaction(null, self, 1));
             return NewBlock(proof);
         }
 
@@ -81,7 +80,7 @@ namespace BlockChain.Domain.Model
             IList<Block> newChain = null;
             foreach (var otherChain in otherChains)
             {
-                if (otherChain.Count > blocks.Count && Validate(otherChain))
+                if (otherChain.Count > chain.Count && Validate(otherChain))
                 {
                     newChain = otherChain;
                 }
@@ -89,7 +88,8 @@ namespace BlockChain.Domain.Model
 
             if (newChain != null)
             {
-                blocks = newChain;
+                chain.Clear();
+                chain.AddRange(newChain);
                 DomainEvents.Raise(new BlockchainReplacedEvent());
                 return true;
             }
@@ -98,31 +98,9 @@ namespace BlockChain.Domain.Model
         }
 
         /// <summary>
-        /// Create a new block in the blockchain
-        /// </summary>
-        internal Block NewBlock(ProofOfWork proof)
-        {
-            if (proof == null)
-                throw new ArgumentNullException("Proof must not be null");
-
-            var block = new Block(
-                index: blocks.Count + 1,
-                proof: proof,
-                previousHash: LastBlock.Hash(),
-                transactions: currentTransactions);
-
-            currentTransactions.Clear();
-            blocks.Add(block);
-
-            DomainEvents.Raise(new NewBlockForgedEvent());
-
-            return block;
-        }
-
-        /// <summary>
         /// Determine if a given blockchain is valid
         /// </summary>
-        private bool Validate(IList<Block> chain)
+        public bool Validate(IList<Block> chain)
         {
             var lastBlock = chain.First();
             var currentIndex = 1;
@@ -141,6 +119,25 @@ namespace BlockChain.Domain.Model
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Create a new block in the blockchain
+        /// </summary>
+        private Block NewBlock(ProofOfWork proof)
+        {
+            var block = new Block(
+                index: chain.Count + 1,
+                proof: proof,
+                previousHash: LastBlock.Hash(),
+                transactions: currentTransactions);
+
+            currentTransactions.Clear();
+            chain.Add(block);
+
+            DomainEvents.Raise(new NewBlockForgedEvent());
+
+            return block;
         }
     }
 }
