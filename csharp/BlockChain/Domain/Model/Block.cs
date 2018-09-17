@@ -47,6 +47,16 @@ namespace BlockChain.Domain.Model
             this.transactions = new List<Transaction>();
         }
 
+        public long Index => index;
+
+        public long Timestamp => timestamp;
+
+        public ProofOfWork Proof => proof;
+
+        public Sha256Hash PreviousHash => previousHash;
+
+        public IReadOnlyCollection<Transaction> Transactions => transactions.AsReadOnly();
+
         public static Block Genesis()
         {
             return new Block();
@@ -57,15 +67,12 @@ namespace BlockChain.Domain.Model
             return new Block(index, new ProofOfWork(proof), new Sha256Hash(previousHash), transactions, timestamp);
         }
 
-        public long Index => index;
-
-        public long Timestamp => timestamp;
-
-        public ProofOfWork Proof => proof;
-
-        public Sha256Hash PreviousHash => previousHash;
-
-        public IReadOnlyCollection<Transaction> Transactions => transactions.AsReadOnly();
+        public bool IsGenesisBlock()
+        {
+            return Index == 1 
+                && PreviousHash == Sha256Hash.Of("Genesis")
+                && Proof == new ProofOfWork(1);
+        }
 
         public Sha256Hash Hash()
         {

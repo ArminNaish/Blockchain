@@ -218,21 +218,20 @@ namespace BlockChain.Tests
 
         #region TestConsensusAlgorithm
         [Fact]
-        public void Should_Replace_Chain_With_Longest_On_Network()
+        public void Should_Replace_Chain_With_Longer_Blockchain()
         {
             // arrange
             var blockchain = new Blockchain(new Node(@"http://127.0.0.1/5001"));
             var longerBlockchain = new Blockchain(new Node(@"http://127.0.0.1/5002"));
             longerBlockchain.NewTransaction(Node.Default(),Node.Default(),2);
             longerBlockchain.Mine();
-            var otherChains = new List<Block>(longerBlockchain.Chain);
 
             // act
-            var actual = blockchain.ResolveConflicts(new[]{otherChains});
+            var actual = blockchain.ResolveConflicts(new[]{longerBlockchain});
 
             // assert
-            actual.Should().Be(true);
-            blockchain.Chain.Should().Equal(longerBlockchain.Chain); // bug
+            actual.Should().BeTrue();
+            blockchain.Chain.Should().Equal(longerBlockchain.Chain);
         }
 
         [Fact]
@@ -243,20 +242,41 @@ namespace BlockChain.Tests
             blockchain.NewTransaction(Node.Default(),Node.Default(),2);
             blockchain.Mine();
             var shorterBlockchain = new Blockchain(new Node(@"http://127.0.0.1/5002"));
-           
-            var otherChains = new List<Block>(shorterBlockchain.Chain);
 
             // act
-            var actual = blockchain.ResolveConflicts(new[]{otherChains});
+            var actual = blockchain.ResolveConflicts(new[]{shorterBlockchain});
 
             // assert
-            actual.Should().Be(false);
+            actual.Should().BeFalse();
             blockchain.Chain.Should().NotBeEmpty();
-            blockchain.Chain.Should().NotEqual(shorterBlockchain.Chain); // bug
+            blockchain.Chain.Should().NotEqual(shorterBlockchain.Chain);
         }
 
         [Fact]
         public void Should_Discard_Invalid_Blockchain()
+        {
+            // arrange
+             var blockchain = new Blockchain(new Node(@"http://127.0.0.1/5001"));
+            var genesis = Block.Genesis();
+            var secondBlock = MakeBlock(2, new Challenge().Solve(genesis.Proof), Sha256Hash.Of("invalid"), new List<Transaction>());
+            var thirdBlock = MakeBlock(3, secondBlock);
+            var chain = new List<Block>
+            {
+                genesis, secondBlock, thirdBlock
+            };
+            var invalidBlockchain = Blockchain.From(chain, new Node(@"http://127.0.0.1/5001"));
+
+            // act
+            var actual = blockchain.ResolveConflicts(new[]{invalidBlockchain});
+
+            // assert
+            actual.Should().BeFalse();
+            blockchain.Chain.Should().NotBeEmpty();
+            blockchain.Chain.Should().NotEqual(invalidBlockchain.Chain);
+        }
+
+        [Fact]
+        public void Should_Verify_Correct_Blockchain()
         {
             // arrange
             var genesis = Block.Genesis();
@@ -266,12 +286,53 @@ namespace BlockChain.Tests
             {
                 genesis, secondBlock, thirdBlock
             };
+            var blockchain = Blockchain.From(chain, Node.Default());
 
             // act
-            // todo: refactor to Blockchain.From(chain).Validate()
-            Blockchain.Validate(chain);
+            var actual = blockchain.Validate();
 
             // assert
+            actual.Should().BeTrue();
+        }
+
+        [Fact]
+        public void Should_Verify_Incorrect_Hash()
+        {
+            // arrange
+            var genesis = Block.Genesis();
+            var secondBlock = MakeBlock(2, new Challenge().Solve(genesis.Proof), Sha256Hash.Of("invalid"), new List<Transaction>());
+            var thirdBlock = MakeBlock(3, secondBlock);
+            var chain = new List<Block>
+            {
+                genesis, secondBlock, thirdBlock
+            };
+            var blockchain = Blockchain.From(chain, Node.Default());
+
+            // act
+            var actual = blockchain.Validate();
+
+            // assert
+            actual.Should().BeFalse();
+        }
+
+        [Fact]
+        public void Should_Verify_Incorrect_Proof_Of_Work()
+        {
+            // arrange
+            var genesis = Block.Genesis();
+            var secondBlock = MakeBlock(2, new Challenge().Solve(new ProofOfWork(999)), genesis.Hash(), new List<Transaction>());
+            var thirdBlock = MakeBlock(3, secondBlock);
+            var chain = new List<Block>
+            {
+                genesis, secondBlock, thirdBlock
+            };
+            var blockchain = Blockchain.From(chain, Node.Default());
+
+            // act
+            var actual = blockchain.Validate();
+
+            // assert
+            actual.Should().BeFalse();   
         }
 
         private static Block MakeBlock(long index, Block previousBlock)
@@ -283,6 +344,11 @@ namespace BlockChain.Tests
                 new List<Transaction> {
                     new Transaction(null, Node.Default(),1)
                 });
+        }
+
+        private static Block MakeBlock( long index, ProofOfWork proof, Sha256Hash hash, IEnumerable<Transaction> transactions)
+        {
+            return new Block(index, proof, hash, transactions);
         }
         #endregion
     }

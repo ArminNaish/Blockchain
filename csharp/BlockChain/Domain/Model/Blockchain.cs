@@ -31,6 +31,21 @@ namespace BlockChain.Domain.Model
         public ICollection<Node> Nodes => nodes;
         private Block LastBlock => chain.Last();
 
+        public static Blockchain From(IEnumerable<Block> chain, Node node)
+        {
+            if (node == null)
+                throw new ArgumentNullException("Node must not be null");
+            if (!chain.Any())
+                throw new ArgumentException("Chain must not be empty");
+            if (!chain.First().IsGenesisBlock())
+                throw new Exception("Chain must start with genesis block");
+
+            var blockchain = new Blockchain(node);
+            blockchain.chain.Clear();
+            blockchain.chain.AddRange(chain);
+            return blockchain;
+        }
+
         /// <summary>
         /// Creates a new transaction to go into the next mined block
         /// </summary>
@@ -75,21 +90,21 @@ namespace BlockChain.Domain.Model
         /// Consensus algorithm, resolves conflicts by replacing
         /// our chain with the longest one in the network.
         /// </summary>
-        public bool ResolveConflicts(IEnumerable<IList<Block>> otherChains)
+        public bool ResolveConflicts(ICollection<Blockchain> otherBlockchains)
         {
-            IList<Block> newChain = null;
-            foreach (var otherChain in otherChains)
+            Blockchain newBlockchain = null;
+            foreach (var otherBlockchain in otherBlockchains)
             {
-                if (otherChain.Count > chain.Count && Validate(otherChain))
+                if (otherBlockchain.Chain.Count > chain.Count && otherBlockchain.Validate())
                 {
-                    newChain = otherChain;
+                    newBlockchain = otherBlockchain;
                 }
             }
 
-            if (newChain != null)
+            if (newBlockchain != null)
             {
                 chain.Clear();
-                chain.AddRange(newChain);
+                chain.AddRange(newBlockchain.Chain);
                 DomainEvents.Raise(new BlockchainReplacedEvent());
                 return true;
             }
@@ -100,7 +115,7 @@ namespace BlockChain.Domain.Model
         /// <summary>
         /// Determine if a given blockchain is valid
         /// </summary>
-        public bool Validate(IList<Block> chain)
+        public bool Validate()
         {
             var lastBlock = chain.First();
             var currentIndex = 1;

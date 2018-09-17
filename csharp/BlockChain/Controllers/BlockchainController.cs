@@ -86,7 +86,7 @@ namespace BlockChain.Controllers
         public dynamic Resolve()
         {
 
-            var otherChains = apiClient.FindChainsInNetwork(blockchain.Nodes);
+            var otherChains = apiClient.FindBlockchains(blockchain.Nodes);
             var replaced = blockchain.ResolveConflicts(otherChains);
             if (replaced)
             {

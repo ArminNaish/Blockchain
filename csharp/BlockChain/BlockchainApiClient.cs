@@ -12,21 +12,21 @@ namespace BlockChain
 {
     public class BlockchainApiClient : IBlockchainApiClient
     {
-        public IEnumerable<IList<Block>> FindChainsInNetwork(IEnumerable<Node> nodes)
+        public ICollection<Blockchain> FindBlockchains(IEnumerable<Node> nodes)
         {
-            var chains = new List<IList<Block>>();
+            var blockchains = new List<Blockchain>();
             foreach (var node in nodes)
             {
                 try
                 {
-                    chains.Add(GetChain(node));
+                    blockchains.Add(GetBlockchain(node));
                 }
                 catch (Exception) { }
             }
-            return chains;
+            return blockchains;
         }
 
-        private IList<Block> GetChain(Node node)
+        private Blockchain GetBlockchain(Node node)
         {
             var client = new RestClient(node.Address);
 
@@ -54,9 +54,9 @@ namespace BlockChain
                 .ToList();
 
             if (chain.Count != length)
-                throw new Exception("Received blockchain is an invalid length");
+                throw new Exception("Received blockchain has an invalid length");
 
-            return chain;
+            return Blockchain.From(chain, node);
         }
     }
 }

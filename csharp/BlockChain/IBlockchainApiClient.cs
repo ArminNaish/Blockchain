@@ -5,6 +5,6 @@ namespace BlockChain
 {
     public interface IBlockchainApiClient
     {
-        IEnumerable<IList<Block>> FindChainsInNetwork(IEnumerable<Node> nodes);
+        ICollection<Blockchain> FindBlockchains(IEnumerable<Node> nodes);
     }
 }
