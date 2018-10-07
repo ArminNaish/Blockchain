@@ -39,8 +39,8 @@ namespace BlockChain.Tests
         {
             // arrange
             var blockchain = new Blockchain();
-            var sender = Node.Default();
-            var recipient = Node.Default();
+            var sender = Guid.NewGuid();
+            var recipient = Guid.NewGuid();
 
             // act
             blockchain.NewTransaction(sender, recipient, 1);
@@ -49,8 +49,8 @@ namespace BlockChain.Tests
             // assert
             blockchain.CurrentTransactions.Should().HaveCount(1);
             actual.Should().NotBeNull();
-            actual.Sender.Should().Be(sender);
-            actual.Recepient.Should().Be(recipient);
+            actual.Sender.Should().Be(Account.Of(sender));
+            actual.Recipient.Should().Be(Account.Of(recipient));
             actual.Amount.Should().Be(1);
         }
 
@@ -59,8 +59,8 @@ namespace BlockChain.Tests
         {
             // arrange
             var blockchain = new Blockchain();
-            var sender = Node.Default();
-            var recipient = Node.Default();
+            var sender = Guid.NewGuid();
+            var recipient = Guid.NewGuid();
 
             // act
             var actual = blockchain.NewTransaction(sender, recipient, 1);
@@ -70,13 +70,13 @@ namespace BlockChain.Tests
         }
 
         [Fact]
-        public void Should_Throw_Exception_When_Recipient_Is_Null()
+        public void Should_Throw_Exception_When_Recipient_Is_Default()
         {
             var blockchain = new Blockchain();
             blockchain
-                .Invoking(b => b.NewTransaction(Node.Default(), null, 1))
+                .Invoking(b => b.NewTransaction(Guid.NewGuid(), Guid.Empty, 1))
                 .Should()
-                .Throw<ArgumentNullException>();
+                .Throw<ArgumentException>();
         }
 
         [Fact]
@@ -84,7 +84,7 @@ namespace BlockChain.Tests
         {
             var blockchain = new Blockchain();
             blockchain
-                .Invoking(b => b.NewTransaction(Node.Default(), Node.Default(), -1))
+                .Invoking(b => b.NewTransaction(Guid.NewGuid(), Guid.NewGuid(), -1))
                 .Should()
                 .Throw<ArgumentException>();
         }
@@ -119,7 +119,7 @@ namespace BlockChain.Tests
             // assert
             actual.Should().NotBeNull();
             actual.Sender.Should().BeNull();
-            actual.Recepient.Should().Be(Node.Default());
+            actual.Recipient.Should().Be(blockchain.Account);
             actual.Amount.Should().Be(1);
         }
 
@@ -158,8 +158,8 @@ namespace BlockChain.Tests
         {
             // arrange
             var blockchain = new Blockchain();
-            var sender = Node.Default();
-            var recipient = Node.Default();
+            var sender = Guid.NewGuid();
+            var recipient = Guid.NewGuid();
 
             // act
             blockchain.NewTransaction(sender, recipient, 1);
@@ -221,13 +221,13 @@ namespace BlockChain.Tests
         public void Should_Replace_Chain_With_Longer_Blockchain()
         {
             // arrange
-            var blockchain = new Blockchain(new Node(@"http://127.0.0.1/5001"));
-            var longerBlockchain = new Blockchain(new Node(@"http://127.0.0.1/5002"));
-            longerBlockchain.NewTransaction(Node.Default(),Node.Default(),2);
+            var blockchain = new Blockchain();
+            var longerBlockchain = new Blockchain();
+            longerBlockchain.NewTransaction(Guid.NewGuid(),Guid.NewGuid(),2);
             longerBlockchain.Mine();
 
             // act
-            var actual = blockchain.ResolveConflicts(new[]{longerBlockchain});
+            var actual = blockchain.ResolveConflicts(new List<IList<Block>>{longerBlockchain.Chain.ToList()});
 
             // assert
             actual.Should().BeTrue();
@@ -238,13 +238,13 @@ namespace BlockChain.Tests
         public void Should_Discard_Shorter_Blockchain()
         {
             // arrange
-            var blockchain = new Blockchain(new Node(@"http://127.0.0.1/5001"));
-            blockchain.NewTransaction(Node.Default(),Node.Default(),2);
+            var blockchain = new Blockchain();
+            blockchain.NewTransaction(Guid.NewGuid(),Guid.NewGuid(),2);
             blockchain.Mine();
-            var shorterBlockchain = new Blockchain(new Node(@"http://127.0.0.1/5002"));
+            var shorterBlockchain = new Blockchain();
 
             // act
-            var actual = blockchain.ResolveConflicts(new[]{shorterBlockchain});
+            var actual = blockchain.ResolveConflicts(new List<IList<Block>>{shorterBlockchain.Chain.ToList()});
 
             // assert
             actual.Should().BeFalse();
@@ -256,23 +256,22 @@ namespace BlockChain.Tests
         public void Should_Discard_Invalid_Blockchain()
         {
             // arrange
-             var blockchain = new Blockchain(new Node(@"http://127.0.0.1/5001"));
+             var blockchain = new Blockchain();
             var genesis = Block.Genesis();
             var secondBlock = MakeBlock(2, new Challenge().Solve(genesis.Proof), Sha256Hash.Of("invalid"), new List<Transaction>());
             var thirdBlock = MakeBlock(3, secondBlock);
-            var chain = new List<Block>
+            var invalidChain = new List<Block>
             {
                 genesis, secondBlock, thirdBlock
             };
-            var invalidBlockchain = Blockchain.From(chain, new Node(@"http://127.0.0.1/5001"));
 
             // act
-            var actual = blockchain.ResolveConflicts(new[]{invalidBlockchain});
+            var actual = blockchain.ResolveConflicts(new List<IList<Block>>{invalidChain.ToList()});
 
             // assert
             actual.Should().BeFalse();
             blockchain.Chain.Should().NotBeEmpty();
-            blockchain.Chain.Should().NotEqual(invalidBlockchain.Chain);
+            blockchain.Chain.Should().NotEqual(invalidChain);
         }
 
         [Fact]
@@ -286,10 +285,9 @@ namespace BlockChain.Tests
             {
                 genesis, secondBlock, thirdBlock
             };
-            var blockchain = Blockchain.From(chain, Node.Default());
 
             // act
-            var actual = blockchain.Validate();
+            var actual = Blockchain.Validate(chain);
 
             // assert
             actual.Should().BeTrue();
@@ -306,10 +304,9 @@ namespace BlockChain.Tests
             {
                 genesis, secondBlock, thirdBlock
             };
-            var blockchain = Blockchain.From(chain, Node.Default());
 
             // act
-            var actual = blockchain.Validate();
+            var actual = Blockchain.Validate(chain);
 
             // assert
             actual.Should().BeFalse();
@@ -326,10 +323,9 @@ namespace BlockChain.Tests
             {
                 genesis, secondBlock, thirdBlock
             };
-            var blockchain = Blockchain.From(chain, Node.Default());
 
             // act
-            var actual = blockchain.Validate();
+            var actual = Blockchain.Validate(chain);
 
             // assert
             actual.Should().BeFalse();   
@@ -342,7 +338,7 @@ namespace BlockChain.Tests
                 new Challenge().Solve(previousBlock.Proof),
                 previousBlock.Hash(),
                 new List<Transaction> {
-                    new Transaction(null, Node.Default(),1)
+                    new Transaction(null, Account.Of(Guid.NewGuid()),1)
                 });
         }
 

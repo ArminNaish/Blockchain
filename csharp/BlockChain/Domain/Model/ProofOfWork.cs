@@ -13,7 +13,7 @@ namespace BlockChain.Domain.Model
             this.proof = proof;
         }
 
-        internal long Proof => proof;
+        public long Value => proof;
 
         public virtual bool Verify(ProofOfWork lastProof)
         {
@@ -21,7 +21,7 @@ namespace BlockChain.Domain.Model
                 throw new InvalidOperationException("Last proof must not be null");
 
             return Sha256Hash
-                .Of($"{lastProof.Proof}{Proof}")
+                .Of($"{lastProof.Value}{Value}")
                 .StartsWith("0000");
         }
     }

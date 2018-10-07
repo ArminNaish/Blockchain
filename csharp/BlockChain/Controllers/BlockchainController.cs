@@ -5,17 +5,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BlockChain.Domain.Model;
 using BlockChain.Domain;
+using BlockChain.ViewModels;
+using BlockChain.Infrastructure;
 
 namespace BlockChain.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class BlockchainsController : ControllerBase
+    public class BlockchainController : ControllerBase
     {
         private readonly Blockchain blockchain;
         private readonly IBlockchainApiClient apiClient;
 
-        public BlockchainsController(Blockchain blockchain, IBlockchainApiClient apiClient)
+        public BlockchainController(Blockchain blockchain, IBlockchainApiClient apiClient)
         {
             if (blockchain == null)
                 throw new ArgumentNullException("Blockchain must not be null");
@@ -36,14 +38,15 @@ namespace BlockChain.Controllers
             };
         }
 
-        // POST blockchain/transaction/new
+        // POST blockchain/transactions/new
         [HttpPost("transactions/new")]
-        public dynamic CreateTransaction(dynamic data)
+        public dynamic CreateTransaction(CreateTransaction vm)
         {
-            if (!data.HasProperties("Sender", "Recipient", "Amout"))
-                BadRequest("Missing values");
+            var index = blockchain.NewTransaction(
+                vm.Sender, 
+                vm.Recipient, 
+                vm.Amount);
 
-            var index = blockchain.NewTransaction(data.Sender, data.Recepient, data.Amount);
             return Ok(new
             {
                 message = $"Transaction will be added to block {index}"
@@ -51,7 +54,7 @@ namespace BlockChain.Controllers
         }
 
         // POST blockchain/mine
-        [HttpPost("{id}/mine")]
+        [HttpPost("mine")]
         public dynamic Mine()
         {
             var block = blockchain.Mine();
@@ -60,17 +63,17 @@ namespace BlockChain.Controllers
                 message = "New block forged",
                 index = block.Index,
                 transactions = block.Transactions,
-                proof = block.Proof,
-                previous_hash = block.PreviousHash
+                proof = block.Proof.Value,
+                previous_hash = block.PreviousHash.Value
             });
         }
 
         // POST blockchain/nodes/register
         [HttpPost("nodes/register")]
-        public dynamic Register(string address)
+        public dynamic Register(RegisterAddress vm)
         {
-            if (Uri.TryCreate(address, UriKind.Absolute, out var uri))
-                return BadRequest("Address must not be empty");
+            if (!Uri.TryCreate(vm.Address, UriKind.Absolute, out var uri))
+                return BadRequest("Address is not well formed URI");
 
             blockchain.Register(uri);
 
@@ -86,7 +89,7 @@ namespace BlockChain.Controllers
         public dynamic Resolve()
         {
 
-            var otherChains = apiClient.FindBlockchains(blockchain.Nodes);
+            var otherChains = apiClient.FindChains(blockchain.Nodes);
             var replaced = blockchain.ResolveConflicts(otherChains);
             if (replaced)
             {

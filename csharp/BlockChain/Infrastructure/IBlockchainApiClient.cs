@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using BlockChain.Domain.Model;
 
-namespace BlockChain
+namespace BlockChain.Infrastructure
 {
     public interface IBlockchainApiClient
     {
-        ICollection<Blockchain> FindBlockchains(IEnumerable<Node> nodes);
+        ICollection<IList<Block>> FindChains(IEnumerable<Node> nodes);
     }
 }

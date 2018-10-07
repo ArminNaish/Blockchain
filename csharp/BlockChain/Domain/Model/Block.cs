@@ -19,8 +19,6 @@ namespace BlockChain.Domain.Model
         {
             if (index <= 0)
                 throw new ArgumentException("Index must be greater than zero");
-            if (index == 1)
-                throw new ArgumentException("Index 1 reserved for genesis block");
             if (proof == null)
                 throw new ArgumentNullException("Proof must not be null");
             if (previousHash == null)
@@ -51,8 +49,10 @@ namespace BlockChain.Domain.Model
 
         public long Timestamp => timestamp;
 
+        [JsonConverter(typeof(ObjectToPropertyConverter), typeof(ProofOfWork), "Value")]
         public ProofOfWork Proof => proof;
 
+        [JsonConverter(typeof(ObjectToPropertyConverter), typeof(Sha256Hash), "Value")]
         public Sha256Hash PreviousHash => previousHash;
 
         public IReadOnlyCollection<Transaction> Transactions => transactions.AsReadOnly();

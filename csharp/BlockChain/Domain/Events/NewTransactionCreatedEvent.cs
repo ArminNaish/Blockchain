@@ -4,14 +4,14 @@ namespace BlockChain.Domain.Events
 {
     internal class NewTransactionCreatedEvent : IDomainEvent
     {
-        private readonly Node sender;
-        private readonly Node recepient;
+        private readonly Account sender;
+        private readonly Account recipient;
         private readonly long amount;
 
-        public NewTransactionCreatedEvent(Node sender, Node recepient, long amount)
+        public NewTransactionCreatedEvent(Account sender, Account recipient, long amount)
         {
             this.sender = sender;
-            this.recepient = recepient;
+            this.recipient = recipient;
             this.amount = amount;
         }
     }

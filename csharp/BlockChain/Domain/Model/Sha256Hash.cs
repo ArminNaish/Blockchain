@@ -19,6 +19,8 @@ namespace BlockChain.Domain.Model
             this.hash = hash;
         }
 
+        public string Value => hash;
+
         public bool StartsWith(string value)
         {
             if (string.IsNullOrEmpty(value))

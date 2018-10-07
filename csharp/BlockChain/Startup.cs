@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using BlockChain.Domain;
 using BlockChain.Controllers;
 using BlockChain.Domain.Model;
+using BlockChain.Infrastructure;
 
 namespace BlockChain
 {
@@ -29,7 +30,7 @@ namespace BlockChain
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddSingleton(MakeBlockchain());
+            services.AddSingleton(new Blockchain());
             services.AddScoped<IBlockchainApiClient, BlockchainApiClient>();
         }
 
@@ -37,13 +38,6 @@ namespace BlockChain
         {
             app.UseMiddleware<ErrorHandlingMiddleware>();
             app.UseMvc();
-        }
-        
-        private Blockchain MakeBlockchain()
-        {
-            var url = Configuration.GetValue<string>("url", @"http://127.0.0.1:5000/");
-            var self = new Node(url);
-            return new Blockchain(self);
         }
     }
 }
